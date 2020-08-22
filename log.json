@@ -1,0 +1,400 @@
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_017.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_018.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_019.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_020.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_021.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_022.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_023.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_024.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_025.jpg
+Traceback (most recent call last):
+  File "run2.py", line 91, in <module>
+    ret = cv2.minAreaRect(pts)
+cv2.error: OpenCV(3.4.2) C:\Miniconda3\conda-bld\opencv-suite_1534379934306\work\modules\imgproc\src\convhull.cpp:137: error: (-215:Assertion failed) total >= 0 && (depth == 5 || depth == 4) in function 'cv::convexHull'
+
+
+(myenv) C:\Users\tktun\Desktop\HK193\DictionaryOCR\craft_gdbscan-master> cd c:\Users\tktun\Desktop\HK193\DictionaryOCR\craft_gdbscan-master && cmd /C "C:\Users\tktun\Anaconda3\python.exe c:\Users\tktun\.vscode\extensions\ms-python.python-2020.8.101144\pythonFiles\lib\python\debugpy\launcher 12714 -- c:\Users\tktun\Desktop\HK193\DictionaryOCR\craft_gdbscan-master\run2.py "
+
+(myenv) C:\Users\tktun\Desktop\HK193\DictionaryOCR\craft_gdbscan-master>python run2.py
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_017.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_018.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_019.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_020.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_021.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_022.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_023.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_024.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_025.jpg
+2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_025.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_026.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_027.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_028.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_029.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_029.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_030.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_031.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_032.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_033.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_034.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_035.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_036.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_037.jpg
+2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_037.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_038.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_039.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_040.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_041.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_042.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_043.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_044.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_045.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_046.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_047.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_048.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_049.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_050.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_051.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_052.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_053.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_054.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_055.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_056.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_057.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_058.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_059.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_060.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_061.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_062.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_063.jpg
+2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_063.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_064.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_065.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_066.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_067.jpg
+2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_067.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_068.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_069.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_070.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_071.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_072.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_073.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_074.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_075.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_076.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_077.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_078.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_079.jpg
+2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_079.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_080.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_081.jpg
+2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_081.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_082.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_083.jpg
+2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_083.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_084.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_085.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_086.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_087.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_088.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_089.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_090.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_091.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_092.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_093.jpg
+2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_093.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_094.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_095.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_096.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_097.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_098.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_099.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_100.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1000.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1001.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1001.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1002.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1003.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1004.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1005.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1006.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1007.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1008.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1009.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_101.jpg
+2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_101.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1010.jpg
+2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1010.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1011.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1012.jpg
+2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1012.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1013.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1013.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1014.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1014.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1015.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1015.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1016.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1017.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1018.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1019.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_102.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1020.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1021.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1021.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1022.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1023.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1024.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1024.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1025.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1025.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1026.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1027.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1027.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1028.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1029.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_103.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1030.jpg
+2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1030.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1031.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1032.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1033.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1033.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1034.jpg
+2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1034.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1035.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1036.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1036.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1037.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1038.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1039.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_104.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_104.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1040.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1041.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1042.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1042.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1043.jpg
+2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1043.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1044.jpg
+Traceback (most recent call last):
+  File "run2.py", line 63, in <module>
+    th = min(list(filter(lambda x: x > 245 and x < 255, hist)))
+ValueError: min() arg is an empty sequence
+
+(myenv) C:\Users\tktun\Desktop\HK193\DictionaryOCR\craft_gdbscan-master>python run2.py
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1044.jpg
+Traceback (most recent call last):
+  File "run2.py", line 63, in <module>
+    th = min(list(filter(lambda x: x > 245 and x < 255, hist)))
+ValueError: min() arg is an empty sequence
+
+(myenv) C:\Users\tktun\Desktop\HK193\DictionaryOCR\craft_gdbscan-master>python run2.py
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1044.jpg
+2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1044.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1045.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1046.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1046.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1047.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1048.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1048.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1049.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1050.jpg
+2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1050.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1051.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1051.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1052.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1053.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1054.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1055.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1056.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1057.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1057.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1058.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1059.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1060.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1061.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1061.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1062.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1062.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1063.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1064.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1065.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1065.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1066.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1066.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1067.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1068.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1068.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1069.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1070.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1071.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1071.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1072.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1073.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1074.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1075.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1076.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1077.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1077.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1078.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1079.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1080.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1081.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1082.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1082.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1083.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1084.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1085.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1086.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1086.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1087.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1088.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1088.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1089.jpg
+2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1089.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1090.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1091.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1092.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1093.jpg
+2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1093.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1094.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1094.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1095.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1095.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1096.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1096.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1097.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1098.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1099.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1100.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1101.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1101.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1102.jpg
+2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1102.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1103.jpg
+2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1103.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1104.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1105.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1106.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1106.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1107.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1108.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1108.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1109.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1110.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1111.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1111.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1112.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1112.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1113.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1114.jpg
+2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1114.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1115.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1116.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1116.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1117.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1118.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1118.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1119.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1120.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1121.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1122.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1123.jpg
+2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1123.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1124.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1124.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1125.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1125.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1126.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1127.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1128.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1129.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1130.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1131.jpg
+2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1131.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1132.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1133.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1134.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1134.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1135.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1135.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1136.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1136.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1137.jpg
+2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1137.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1138.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1139.jpg
+2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1139.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1140.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1141.jpg
+2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1141.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1142.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1142.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1143.jpg
+2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1143.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1144.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1145.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1145.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1146.jpg
+2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1146.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1147.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1148.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1149.jpg
+2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1149.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1150.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1151.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1151.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1152.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1153.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1153.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1154.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1155.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1155.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1156.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1156.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1157.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1158.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1158.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1159.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1159.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1160.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1160.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1161.jpg
+2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1161.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1162.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1162.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1163.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1164.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1164.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1165.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1166.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1167.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1167.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1168.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1169.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1169.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1170.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1171.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1171.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1172.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1173.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1174.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1175.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1176.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1177.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1178.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1178.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1179.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1179.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1180.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1181.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1181.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1182.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1183.jpg
+2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1183.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1184.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1184.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1185.jpg
+File 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1185.jpg error! Please recheck it.
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1186.jpg
+--------------------- 2003_HoangPhe_Tu dien tieng Viet_Vien Ngon ngu hoc_1187.jpg
