@@ -14,6 +14,7 @@ wordTypes = { 'bt.': 'biến từ', 'chđt.': 'chỉ định từ', 'dt.': 'danh
 words = []
 types = []
 contents = []
+exs = []
 i = 0
 for txt in path:
     print(txt)
@@ -21,46 +22,70 @@ for txt in path:
     txtFile = re.sub(u'[^\u0020-\uD7FF\u0009\u000A\u000D\uE000-\uFFFD\U00010000-\U0010FFFF]+','', txtFile) # remove all non-XML-compatible characters
     # par = doc.add_paragraph(txtFile)
     content = txtFile.split('\n')
+    cumTu = False
+    viDu = False
+    first = False
+    firsVD = False
     for line in content:
         if line == '':
             continue
-        i = 1
-        while line[:i].isupper() and i <= len(line):
-            i += 1
         
-        i -= 2
-        newWord = False
-        wordType = ''
-        if i == 1 and len(line) >= 4:
-            if line[i + 1] == '(':
-                newWord = True
-            elif line[i + 1: i + 4] in wordTypes or line[i + 1: i + 5] in wordTypes or line[i + 1: i + 6] in wordTypes:
-                newWord = True
-        elif i > 1:
-            newWord = True
-        
-        if newWord:
-            if line[i + 1: i + 4] in wordTypes:
-                wordType = line[i + 1: i + 4]
-            elif line[i + 1: i + 5] in wordTypes:
-                wordType = line[i + 1: i + 5]
-            elif line[i + 1: i + 6] in wordTypes:
-                wordType = line[i + 1: i + 6]
-            newPara = line[:i]
-            line = line[i:]
-            contents.append(para)
-            words.append(newPara)
-            # docPara.add_run(para)
+        if line.find(' - ') != -1:
+            cumTu = False
+            viDu = False
+            firsVD = True
+            words.append(line[:line.find(' - ')])
+            contents.append(line[line.find(' - ') + 3:])
+            if len(exs) != len(words):
+                exs.append('')
+            if len(types) != len(words):
+                types.append(types[len(types) - 1])
             # docPara = doc.add_paragraph('')
-            # docPara.add_run(newPara).bold = True
-            if wordType != '':
-                try:
-                    line = line[1 + len(wordType)]
-                except Exception as e:
-                    line = line[len(wordType)]
-                types.append(wordTypes[wordType])
-            else: types.append(' ')
-            para = ''
+            # docPara.add_run(line[:line.find(' - ')]).bold = True
+            # docPara.add_run(line[line.find(' - '):])
+
+        elif line.lower().find('ví dụ') != -1:
+            viDu = True
+            if firsVD:
+                exs.append(line[line.find(':') + 2:])
+                firsVD = False
+            else:
+                exs[len(exs) - 1] += line[line.find(':') + 1:]
+            # docPara.add_run(' ' + line[:line.find(':')]).italic = True
+            # docPara.add_run(line[line.find(':'):])
+            pass
+
+        elif cumTu == True and not line.isupper():
+            if not first:
+                pass
+                # docPara.add_run(' ' + line).bold = True
+            else:
+                # docPara = doc.add_paragraph('')
+                # docPara.add_run(line).bold = True
+                # docParaFormat = docPara.paragraph_format
+                # docParaFormat.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                first = False
+                
+
+        elif line.isupper():
+            if cumTu == True:
+                types[len(types) - 1] += ' ' + line
+                # docPara.add_run(' ' + line).bold = True
+            else:
+                types.append(line)
+                # docPara = doc.add_paragraph('')
+                # docPara.add_run(line).bold = True
+                # docParaFormat = docPara.paragraph_format
+                # docParaFormat.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                cumTu = True
+            first = True
+        
+        else:
+            if viDu:
+                exs[len(exs) - 1] += ' ' + line
+            else:
+                contents[len(contents) - 1] += ' ' + line
+            # docPara.add_run(' ' + line)
         # for wordType in wordTypes.keys():
         #     if wordType in line:
         #         if line.find(wordType) + len(wordType) < len(line) and line[line.find(wordType) + len(wordType)] == ')':
@@ -85,9 +110,8 @@ for txt in path:
         #         para = ''
         #         break
         
-        para += (line + ' ')
         # print(para)
-# contents = contents[1:]
+exs = exs[1:]
 # doc.save('result.docx')
 
 import xml.etree.ElementTree as ET
@@ -114,7 +138,7 @@ root = tree.getroot()
 for i in range(len(contents)):
     element = root.makeelement('MUC_TU', {'Noi_dung': words[i], 'Loai_tu': types[i]})
     root.append(element)
-    ET.SubElement(root[i], 'Y_NGHIA', {'Noi_dung': contents[i], 'Minh_hoa': ''})
+    ET.SubElement(root[i], 'Y_NGHIA', {'Noi_dung': contents[i], 'Minh_hoa': exs[i]})
 
 indent(root)
 tree.write('result.xml', encoding='utf-8', xml_declaration=True)
