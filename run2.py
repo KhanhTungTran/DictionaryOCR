@@ -49,63 +49,64 @@ imageName = list(filter(lambda file: file[-3:] == 'jpg', os.listdir(inputDir)))
 columnDir = 'splitColumn'
 resultsDir = 'results'
 
-splitImageToColumns(imageName, inputDir, columnDir)
-    # img = cv2.imread(inputDir + '/' + image)
-    # (H, W) = img.shape[:2]
-    # gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    # ret, thes = cv2.threshold(gray,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
+# splitImageToColumns(imageName, inputDir, columnDir)
+# for image in imageName:
+#     img = cv2.imread(inputDir + '/' + image)
+#     (H, W) = img.shape[:2]
+#     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+#     ret, thes = cv2.threshold(gray,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
 
-    # colList = []
+#     colList = []
 
-    # try:
-    #     # Crop column
-    #     h, w = img.shape[:2]
-    #     dst = cv2.erode(thes, kernel=np.ones((30, 10)))
-    #     hist = cv2.reduce(dst, 0, cv2.REDUCE_AVG).reshape(-1)
-    #     th = min(list(filter(lambda x: x > 245 and x < 255, hist)))
-    #     uppers = [y for y in range(w-1) if hist[y]>th and hist[y+1]<=th]
+#     try:
+#         # Crop column
+#         h, w = img.shape[:2]
+#         dst = cv2.erode(thes, kernel=np.ones((30, 10)))
+#         hist = cv2.reduce(dst, 0, cv2.REDUCE_AVG).reshape(-1)
+#         th = min(list(filter(lambda x: x > 245 and x < 255, hist)))
+#         uppers = [y for y in range(w-1) if hist[y]>th and hist[y+1]<=th]
 
-    #     lowers = [y for y in range(w-1) if hist[y]<=th and hist[y+1]>th]
-    #     # print('lowers :', lowers)
-    #     potentialPair = []
-    #     for iU in range(len(uppers)):
-    #         for iL in range(len(lowers)):
-    #             if (uppers[iU] < lowers[iL] and abs(uppers[iU] - lowers[iL]) > w / 4 and abs(uppers[iU] - lowers[iL]) < w / 2):
-    #                 potentialPair.append([iU, iL])
-    #     leftCols = list(filter(lambda x: uppers[x[0]] < w / 3, potentialPair))
-    #     rightCols = list(filter(lambda x: lowers[x[1]] > 2 * w / 3, potentialPair))
-    # except Exception as e:
-    #     print(image)
-    #     continue
+#         lowers = [y for y in range(w-1) if hist[y]<=th and hist[y+1]>th]
+#         # print('lowers :', lowers)
+#         potentialPair = []
+#         for iU in range(len(uppers)):
+#             for iL in range(len(lowers)):
+#                 if (uppers[iU] < lowers[iL] and abs(uppers[iU] - lowers[iL]) > w / 4 and abs(uppers[iU] - lowers[iL]) < w / 2):
+#                     potentialPair.append([iU, iL])
+#         leftCols = list(filter(lambda x: uppers[x[0]] < w / 3, potentialPair))
+#         rightCols = list(filter(lambda x: lowers[x[1]] > 2 * w / 3, potentialPair))
+#     except Exception as e:
+#         print(image)
+#         continue
     
-    # if (len(leftCols) == 0 or len(rightCols) == 0):
-    #     print("File " + image + " error! Please recheck it.")
-    #     continue
-    # else:
-    #     leftCol = min(leftCols, key=lambda x: lowers[x[1]] - uppers[x[0]])
-    #     rightCol = min(rightCols, key=lambda x: lowers[x[1]] - uppers[x[0]])
-    #     expand = round((lowers[leftCol[1]] - uppers[leftCol[0]]) * 0.03)
-    #     colList.append(thes[0:h,uppers[leftCol[0]] - expand:lowers[leftCol[1]] + expand])
-    #     expand = round((lowers[rightCol[1]] - uppers[rightCol[0]]) * 0.03)
-    #     colList.append(thes[0:h,uppers[rightCol[0]] - expand:lowers[rightCol[1]] + expand])
+#     if (len(leftCols) == 0 or len(rightCols) == 0):
+#         print("File " + image + " error! Please recheck it.")
+#         continue
+#     else:
+#         leftCol = min(leftCols, key=lambda x: lowers[x[1]] - uppers[x[0]])
+#         rightCol = min(rightCols, key=lambda x: lowers[x[1]] - uppers[x[0]])
+#         expand = round((lowers[leftCol[1]] - uppers[leftCol[0]]) * 0.03)
+#         colList.append(thes[0:h,uppers[leftCol[0]] - expand:lowers[leftCol[1]] + expand])
+#         expand = round((lowers[rightCol[1]] - uppers[rightCol[0]]) * 0.03)
+#         colList.append(thes[0:h,uppers[rightCol[0]] - expand:lowers[rightCol[1]] + expand])
 
-    # # Skew correction for each column
-    # for i, col in enumerate(colList):
-    #     try:
-    #         gray = cv2.bitwise_not(col)
-    #         pts = cv2.findNonZero(gray)
-    #         ret = cv2.minAreaRect(pts)
-    #         (cx,cy), (w,h), angle = ret
-    #         if angle < -45:
-    #             angle = -(90 + angle)
-    #         else:
-    #             angle = -angle
-    #         M = cv2.getRotationMatrix2D((cx,cy), angle, 1.0)
-    #         rotated = cv2.warpAffine(col, M, (col.shape[1], col.shape[0]), flags=cv2.INTER_CUBIC, borderMode=cv2.BORDER_REPLICATE)
-    #         cv2.imwrite(columnDir + '/' + image[0:-4] + '-' + str(i) + '.jpg', rotated)
-    #     except Exception as e:
-    #         print(image)
-    #         continue
+#     # Skew correction for each column
+#     for i, col in enumerate(colList):
+#         try:
+#             gray = cv2.bitwise_not(col)
+#             pts = cv2.findNonZero(gray)
+#             ret = cv2.minAreaRect(pts)
+#             (cx,cy), (w,h), angle = ret
+#             if angle < -45:
+#                 angle = -(90 + angle)
+#             else:
+#                 angle = -angle
+#             M = cv2.getRotationMatrix2D((cx,cy), angle, 1.0)
+#             rotated = cv2.warpAffine(col, M, (col.shape[1], col.shape[0]), flags=cv2.INTER_CUBIC, borderMode=cv2.BORDER_REPLICATE)
+#             cv2.imwrite(columnDir + '/' + image[0:-4] + '-' + str(i) + '.jpg', rotated)
+#         except Exception as e:
+#             print(image)
+#             continue
 
 
 def copyStateDict(state_dict):

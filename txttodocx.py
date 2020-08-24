@@ -9,9 +9,10 @@ path = os.listdir(inputsDir)
 # và thêm '\n' trước dấu chấm vừa tìm được
 doc = Document()
 para = ''
-wordTypes = {'c.': 'cảm từ', 'd.': 'danh từ', 'đ.': 'đại từ', 'đg.': 'động từ', 'k.': 'kết từ', 'p.': 'phụ từ', 't.': 'tính từ', 'tr.': 'trợ từ', 'x.': 'xem'}
+wordTypes = { 'bt.': 'biến từ', 'chđt.': 'chỉ định từ', 'dt.': 'danh từ', 'đdt.': 'đại danh từ', 'đt.': 'động từ', 'gt.': 'giới từ', 'lt.': 'liên từ', 'pht.': 'phó từ', 'st.': 'số từ', 'tt.': 'tĩnh từ', 'trt.': 'trạng từ', 'tht.': 'thán từ', 'vt.': 'vấn từ'}
 docPara = doc.add_paragraph('')
 for txt in path:
+    print(txt)
     txtFile = open(inputsDir + '/' + txt, encoding='utf-8', errors='ignore').read()
     txtFile = re.sub(u'[^\u0020-\uD7FF\u0009\u000A\u000D\uE000-\uFFFD\U00010000-\U0010FFFF]+','', txtFile) # remove all non-XML-compatible characters
     # par = doc.add_paragraph(txtFile)
@@ -19,19 +20,54 @@ for txt in path:
     for line in contents:
         if line == '':
             continue
+        i = 1
+        while line[:i].isupper() and i <= len(line):
+            i += 1
         
-        for wordType in wordTypes.keys():
-            if wordType in line:
-                newPara = para[para.rfind('.') + 1:] + line[:line.find(wordType)]
-                line = line[line.find(wordType) + len(wordType):]
-                para = para[:para.rfind('.') + 1]
-                # break
-                docPara.add_run(para)
-                docPara = doc.add_paragraph('')
-                docPara.add_run(newPara).bold = True
+        i -= 2
+        newWord = False
+        wordType = ''
+        if i == 1 and len(line) >= 4:
+            if line[i + 1] == '(':
+                newWord = True
+            elif line[i + 1: i + 4] in wordTypes or line[i + 1: i + 5] in wordTypes or line[i + 1: i + 6] in wordTypes:
+                newWord = True
+        elif i > 1:
+            newWord = True
+        
+        if newWord:
+            if line[i + 1: i + 4] in wordTypes:
+                wordType = line[i + 1: i + 4]
+            elif line[i + 1: i + 5] in wordTypes:
+                wordType = line[i + 1: i + 5]
+            elif line[i + 1: i + 6] in wordTypes:
+                wordType = line[i + 1: i + 6]
+            newPara = line[:i]
+            line = line[i:]
+            docPara.add_run(para)
+            docPara = doc.add_paragraph('')
+            docPara.add_run(newPara).bold = True
+            if wordType != '':
+                line = line[1 + len(wordType) - 1]
+                docPara.add_run(' ')
                 docPara.add_run(wordTypes[wordType]).italic = True
-                para = ''
-                break
+            para = ''
+            
+        # for wordType in wordTypes.keys():
+        #     if wordType in line:
+        #         if line.find(wordType) + len(wordType) < len(line) and line[line.find(wordType) + len(wordType)] == ')':
+        #             continue
+        #         newPara = para[para.rfind('.') + 1:] + line[:line.find(wordType)]
+        #         line = line[line.find(wordType) + len(wordType):]
+        #         para = para[:para.rfind('.') + 1]
+        #         # break
+        #         docPara.add_run(para)
+        #         docPara = doc.add_paragraph('')
+        #         docPara.add_run(newPara).bold = True
+        #         # docPara.add_run(' ')
+        #         docPara.add_run(wordTypes[wordType]).italic = True
+        #         para = ''
+        #         break
         
         para += (line + ' ')
 

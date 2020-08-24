@@ -26,7 +26,7 @@ def splitImageToColumns(imageNames, inputsDir, columnsDir):
         x, y, w, h = cv2.boundingRect(coords) # Find minimum spanning bounding box
 
         cropRight = 0
-        if (x + w - img.shape[1]) <= 100:
+        if (x + w - img.shape[1]) <= 100 and (x + w - img.shape[1]) >= 0:
             # print('stupid')
             cropRight = 200
         rect = img[y:y+h, x:x+w] # Crop the image - note we do this on the original image
