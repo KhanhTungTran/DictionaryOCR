@@ -2,6 +2,7 @@ from docx import Document
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 import re
 import os
+from docx.shared import Inches
 
 inputsDir = 'results'
 path = os.listdir(inputsDir)
@@ -21,46 +22,90 @@ for txt in path:
     cumTu = False
     vidu = False
     first = False
+    capTu = False
     for line in contents:
         if line == '':
             continue
         
-        if line.find(' - ') != -1:
-            cumTu = False
-            vidu = False
+        # print(line, ' ', capTu)
+
+        if line.startswith('Ví dụ'):
             docPara = doc.add_paragraph('')
-            docPara.add_run(line[:line.find(' - ')]).bold = True
-            docPara.add_run(line[line.find(' - '):])
+            paraFormat = docPara.paragraph_format
+            paraFormat.left_indent = Inches(0.5)
+            docPara.add_run(line)
+            capTu = False
 
-        elif line.lower().find('ví dụ') != -1:
-            docPara.add_run(' ' + line[:line.find(':')]).italic = True
-            docPara.add_run(line[line.find(':'):])
-            pass
-
-        elif cumTu == True and not line.isupper():
-            if not first:
-                docPara.add_run(' ' + line).bold = True
-            else:
+        elif line.find(' - ') != -1:
+            if line.isupper():
                 docPara = doc.add_paragraph('')
                 docPara.add_run(line).bold = True
-                docParaFormat = docPara.paragraph_format
-                docParaFormat.alignment = WD_ALIGN_PARAGRAPH.CENTER
-                first = False
+                docPara.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                capTu = False
+            elif line[:line.find(' - ')].isupper():
+                docPara = doc.add_paragraph('')
+                docPara.add_run(line[:line.find(' - ')]).bold = True
+                docPara.add_run(line[line.find(' - '):])
+                capTu = False
+            elif capTu == True:
+                docPara = doc.add_paragraph('')
+                run = docPara.add_run(line)
+                run.font.bold = True
+                run.font.italic = True
+                docPara.paragraph_format.left_indent = Inches(0.5)      
+
+        elif line == 'Gặp từ trái nghĩa:' or line == 'Cặp từ trái nghĩa:':
+            docPara = doc.add_paragraph('')
+            paraFormat = docPara.paragraph_format
+            paraFormat.left_indent = Inches(0.5)
+            run = docPara.add_run('Cặp từ trái nghĩa:')
+            run.font.bold = True
+            run.font.underline = True
+            capTu = True
+
+        elif capTu == True:
+            docPara = doc.add_paragraph('')
+            run = docPara.add_run(line)
+            docPara.paragraph_format.left_indent = Inches(0.5)  
+
+        else:
+            docPara.add_run(line)
+        # if line.find(' - ') != -1:
+        #     cumTu = False
+        #     vidu = False
+        #     docPara = doc.add_paragraph('')
+        #     docPara.add_run(line[:line.find(' - ')]).bold = True
+        #     docPara.add_run(line[line.find(' - '):])
+
+        # elif line.lower().find('ví dụ') != -1:
+        #     docPara.add_run(' ' + line[:line.find(':')]).italic = True
+        #     docPara.add_run(line[line.find(':'):])
+        #     pass
+
+        # elif cumTu == True and not line.isupper():
+        #     if not first:
+        #         docPara.add_run(' ' + line).bold = True
+        #     else:
+        #         docPara = doc.add_paragraph('')
+        #         docPara.add_run(line).bold = True
+        #         docParaFormat = docPara.paragraph_format
+        #         docParaFormat.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        #         first = False
                 
 
-        elif line.isupper():
-            if cumTu == True:
-                docPara.add_run(' ' + line).bold = True
-            else:
-                docPara = doc.add_paragraph('')
-                docPara.add_run(line).bold = True
-                docParaFormat = docPara.paragraph_format
-                docParaFormat.alignment = WD_ALIGN_PARAGRAPH.CENTER
-                cumTu = True
-            first = True
+        # elif line.isupper():
+        #     if cumTu == True:
+        #         docPara.add_run(' ' + line).bold = True
+        #     else:
+        #         docPara = doc.add_paragraph('')
+        #         docPara.add_run(line).bold = True
+        #         docParaFormat = docPara.paragraph_format
+        #         docParaFormat.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        #         cumTu = True
+        #     first = True
         
-        else:
-            docPara.add_run(' ' + line)
+        # else:
+        #     docPara.add_run(' ' + line)
         # for wordType in wordTypes.keys():
         #     if wordType in line:
         #         if line.find(wordType) + len(wordType) < len(line) and line[line.find(wordType) + len(wordType)] == ')':

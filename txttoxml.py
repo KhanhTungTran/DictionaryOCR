@@ -25,66 +25,137 @@ for txt in path:
     cumTu = False
     viDu = False
     first = False
-    firsVD = False
+    firstVD = False
+    capTu = False
     for line in content:
         if line == '':
             continue
-        
-        if line.find(' - ') != -1:
-            cumTu = False
-            viDu = False
-            firsVD = True
-            words.append(line[:line.find(' - ')])
-            contents.append(line[line.find(' - ') + 3:])
-            if len(exs) != len(words):
-                exs.append('')
-            if len(types) != len(words):
-                types.append(types[len(types) - 1])
-            # docPara = doc.add_paragraph('')
-            # docPara.add_run(line[:line.find(' - ')]).bold = True
-            # docPara.add_run(line[line.find(' - '):])
 
-        elif line.lower().find('ví dụ') != -1:
+        if line.startswith('Ví dụ'):
+            # docPara = doc.add_paragraph('')
+            # paraFormat = docPara.paragraph_format
+            # paraFormat.left_indent = Inches(0.5)
+            # docPara.add_run(line)
             viDu = True
-            if firsVD:
+            if firstVD:
                 exs.append(line[line.find(':') + 2:])
-                firsVD = False
+                firstVD = False
             else:
                 exs[len(exs) - 1] += line[line.find(':') + 1:]
-            # docPara.add_run(' ' + line[:line.find(':')]).italic = True
-            # docPara.add_run(line[line.find(':'):])
-            pass
+            capTu = False
 
-        elif cumTu == True and not line.isupper():
-            if not first:
-                pass
-                # docPara.add_run(' ' + line).bold = True
-            else:
-                # docPara = doc.add_paragraph('')
-                # docPara.add_run(line).bold = True
-                # docParaFormat = docPara.paragraph_format
-                # docParaFormat.alignment = WD_ALIGN_PARAGRAPH.CENTER
-                first = False
-                
-
-        elif line.isupper():
-            if cumTu == True:
-                types[len(types) - 1] += ' ' + line
-                # docPara.add_run(' ' + line).bold = True
-            else:
+        elif line.find(' - ') != -1:
+            viDu = False
+            firstVD = True
+            if line.isupper():
                 types.append(line)
                 # docPara = doc.add_paragraph('')
                 # docPara.add_run(line).bold = True
-                # docParaFormat = docPara.paragraph_format
-                # docParaFormat.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                # docPara.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                capTu = False
+            elif line[:line.find(' - ')].isupper():
+                while len(exs) < len(words):
+                    exs.append('')
                 cumTu = True
-            first = True
-        
+                words.append(line[:line.find(' - ')])
+                if len(words) > len(types):
+                    types.append(types[len(types) - 1])
+                contents.append(line[line.find(' - ') + 3:])
+                # docPara = doc.add_paragraph('')
+                # docPara.add_run(line[:line.find(' - ')]).bold = True
+                # docPara.add_run(line[line.find(' - '):])
+                capTu = False
+            elif capTu == True:
+                if len(contents) >= len(words):
+                    contents[len(contents) - 1] += line
+                else:
+                    contents.append(line)
+                # docPara = doc.add_paragraph('')
+                # run = docPara.add_run(line)
+                # run.font.bold = True
+                # run.font.italic = True
+                # docPara.paragraph_format.left_indent = Inches(0.5)      
+
+        elif line == 'Gặp từ trái nghĩa:' or line == 'Cặp từ trái nghĩa:':
+            types.append(types[len(types) - 1])
+            words.append('Cặp từ trái nghĩa')
+            # docPara = doc.add_paragraph('')
+            # paraFormat = docPara.paragraph_format
+            # paraFormat.left_indent = Inches(0.5)
+            # run = docPara.add_run('Cặp từ trái nghĩa:')
+            # run.font.bold = True
+            # run.font.underline = True
+            capTu = True
+
+        elif capTu == True:
+            exs.append(line)
+            # docPara = doc.add_paragraph('')
+            # run = docPara.add_run(line)
+            # docPara.paragraph_format.left_indent = Inches(0.5)  
+
         else:
             if viDu:
                 exs[len(exs) - 1] += ' ' + line
             else:
                 contents[len(contents) - 1] += ' ' + line
+
+            # docPara.add_run(line)
+        
+        # if line.find(' - ') != -1:
+        #     cumTu = False
+        #     viDu = False
+        #     firsVD = True
+        #     words.append(line[:line.find(' - ')])
+        #     contents.append(line[line.find(' - ') + 3:])
+        #     if len(exs) != len(words):
+        #         exs.append('')
+        #     if len(types) != len(words):
+        #         types.append(types[len(types) - 1])
+        #     # docPara = doc.add_paragraph('')
+        #     # docPara.add_run(line[:line.find(' - ')]).bold = True
+        #     # docPara.add_run(line[line.find(' - '):])
+
+        # elif line.lower().find('ví dụ') != -1:
+        #     viDu = True
+        #     if firsVD:
+        #         exs.append(line[line.find(':') + 2:])
+        #         firsVD = False
+        #     else:
+        #         exs[len(exs) - 1] += line[line.find(':') + 1:]
+        #     # docPara.add_run(' ' + line[:line.find(':')]).italic = True
+        #     # docPara.add_run(line[line.find(':'):])
+        #     pass
+
+        # elif cumTu == True and not line.isupper():
+        #     if not first:
+        #         pass
+        #         # docPara.add_run(' ' + line).bold = True
+        #     else:
+        #         # docPara = doc.add_paragraph('')
+        #         # docPara.add_run(line).bold = True
+        #         # docParaFormat = docPara.paragraph_format
+        #         # docParaFormat.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        #         first = False
+                
+
+        # elif line.isupper():
+        #     if cumTu == True:
+        #         types[len(types) - 1] += ' ' + line
+        #         # docPara.add_run(' ' + line).bold = True
+        #     else:
+        #         types.append(line)
+        #         # docPara = doc.add_paragraph('')
+        #         # docPara.add_run(line).bold = True
+        #         # docParaFormat = docPara.paragraph_format
+        #         # docParaFormat.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        #         cumTu = True
+        #     first = True
+        
+        # else:
+        #     if viDu:
+        #         exs[len(exs) - 1] += ' ' + line
+        #     else:
+        #         contents[len(contents) - 1] += ' ' + line
             # docPara.add_run(' ' + line)
         # for wordType in wordTypes.keys():
         #     if wordType in line:
@@ -111,7 +182,8 @@ for txt in path:
         #         break
         
         # print(para)
-exs = exs[1:]
+while len(exs) < len(words):
+    exs.append('')
 # doc.save('result.docx')
 
 import xml.etree.ElementTree as ET
