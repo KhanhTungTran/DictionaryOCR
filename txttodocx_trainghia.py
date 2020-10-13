@@ -2,7 +2,7 @@ from docx import Document
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 import re
 import os
-from docx.shared import Inches
+from docx.shared import Inches, RGBColor
 import json
 
 def searchForUnderline(para, text, start, end, indexes, bold, italic):
@@ -11,25 +11,34 @@ def searchForUnderline(para, text, start, end, indexes, bold, italic):
         if start <= index and index < end:
             cuts.append(index - start)
         else:   break
-    
+    # print(cuts, ' ', text)
+
     low = 0
     for index in cuts:
         high = index
         # if high > 0:
-        run = para.add_run(text[low:high])
-        run.bold = bold
-        run.italic = italic
+        for i in range(low, high):
+            run = para.add_run(text[i])
+            run.bold = bold
+            run.italic = italic
+            if text[i] == '*':
+                run.font.color.rgb = RGBColor(0xFF, 0x00, 0x00)
 
         run = para.add_run(text[index])
         run.bold = bold
         run.italic = italic
         run.underline = True
+        if text[index] == '*':
+            run.font.color.rgb = RGBColor(0xFF, 0x00, 0x00)
 
         low = high + 1
 
-    run = para.add_run(text[low:end-start])
-    run.bold = bold
-    run.italic = italic
+    for i in range(low, end - start):
+        run = para.add_run(text[i])
+        run.bold = bold
+        run.italic = italic
+        if text[i] == '*':
+            run.font.color.rgb = RGBColor(0xFF, 0x00, 0x00)
 
 inputsDir = 'results'
 path = os.listdir(inputsDir)
@@ -39,7 +48,22 @@ path = os.listdir(inputsDir)
 doc = Document()
 para = ''
 wordTypes = { 'bt.': 'biến từ', 'chđt.': 'chỉ định từ', 'dt.': 'danh từ', 'đdt.': 'đại danh từ', 'đt.': 'động từ', 'gt.': 'giới từ', 'lt.': 'liên từ', 'pht.': 'phó từ', 'st.': 'số từ', 'tt.': 'tĩnh từ', 'trt.': 'trạng từ', 'tht.': 'thán từ', 'vt.': 'vấn từ'}
+
 docPara = doc.add_paragraph('')
+docPara.add_run('KÍ HIỆU:').bold = True
+
+docPara = doc.add_paragraph('', style = 'ListBullet')
+docPara.add_run('*').font.color.rgb = RGBColor(0xFF, 0x00, 0x00)
+docPara.add_run(': các kí tự lạ nằm ngoài bảng chữ cái Tiếng Việt')
+
+docPara = doc.add_paragraph('', style = 'ListBullet')
+docPara.add_run('_').bold = True
+docPara.add_run(': các chữ cái có xác suất dự đoán sai cao')
+
+docPara = doc.add_paragraph('\n')
+docPara = doc.add_paragraph('')
+
+
 for txt in path:
     print(txt)
     txtFile = open(inputsDir + '/' + txt, encoding='utf-8', errors='ignore').read()
@@ -58,7 +82,8 @@ for txt in path:
         # print(line[line.rfind('['):line.rfind(']') + 1])
         if line[line.rfind('['):line.rfind(']') + 1] != '':
             indexes = json.loads(line[line.rfind('['):line.rfind(']') + 1]) # string to list
-        
+            indexes = sorted(indexes)
+
         line = line[:line.rfind('[')]
 
         if line.startswith('Ví dụ'):
@@ -107,5 +132,9 @@ for txt in path:
             docPara.paragraph_format.left_indent = Inches(0.5)  
 
         else:
-            docPara.add_run(line)
+            for i in range(len(line)):
+                run = docPara.add_run(line[i])
+                if line[i] == '*':
+                    run.font.color.rgb = RGBColor(0xFF, 0x00, 0x00)
+                
 doc.save('result.docx')
