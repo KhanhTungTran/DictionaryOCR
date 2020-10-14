@@ -2,15 +2,18 @@
 import re
 import os
 
+def hasDigits(inputString):
+    # return any(char.isdigit() for char in inputString)
+    count = 0
+    for char in inputString:
+        if char.isdigit():
+            count += 1
+    return True if count > 2 else False
+
 inputsDir = 'results'
 path = os.listdir(inputsDir)
-# Đi từng dòng, dòng nào là '' thì bỏ qua
-# Tìm những cụm như ' ph.', ' vch.', ... => quay ngược lại tìm dấu chấm trước đó, in đậm từ dấu chấm đến trước cụm,
-# và thêm '\n' trước dấu chấm vừa tìm được
-# doc = Document()
 para = ''
 wordTypes = { 'bt.': 'biến từ', 'chđt.': 'chỉ định từ', 'dt.': 'danh từ', 'đdt.': 'đại danh từ', 'đt.': 'động từ', 'gt.': 'giới từ', 'lt.': 'liên từ', 'pht.': 'phó từ', 'st.': 'số từ', 'tt.': 'tĩnh từ', 'trt.': 'trạng từ', 'tht.': 'thán từ', 'vt.': 'vấn từ'}
-# docPara = doc.add_paragraph('')
 words = []
 types = []
 contents = []
@@ -29,6 +32,9 @@ for txt in path:
     capTu = False
     for line in content:
         if line == '':
+            continue
+
+        if line.isupper() and hasDigits(line):
             continue
 
         if line.startswith('Ví dụ'):
@@ -76,6 +82,7 @@ for txt in path:
                 # run.font.italic = True
                 # docPara.paragraph_format.left_indent = Inches(0.5)      
 
+            
         elif line == 'Gặp từ trái nghĩa:' or line == 'Cặp từ trái nghĩa:':
             types.append(types[len(types) - 1])
             words.append('Cặp từ trái nghĩa')
@@ -86,18 +93,23 @@ for txt in path:
             # run.font.bold = True
             # run.font.underline = True
             capTu = True
-
+            
+        elif words[-1] == 'Cặp từ trái nghĩa' and line.isupper():
+            if types[-1].find(' - ') != -1:
+                types.append(line)
+            else:
+                types[-1] += ' - ' + line
         elif capTu == True:
             exs.append(line)
             # docPara = doc.add_paragraph('')
             # run = docPara.add_run(line)
             # docPara.paragraph_format.left_indent = Inches(0.5)  
 
+        elif viDu:
+            exs[len(exs) - 1] += ' ' + line
+        
         else:
-            if viDu:
-                exs[len(exs) - 1] += ' ' + line
-            else:
-                contents[len(contents) - 1] += ' ' + line
+            contents[len(contents) - 1] += ' ' + line
 
             # docPara.add_run(line)
         
@@ -207,10 +219,26 @@ def indent(elem, level=0):
 tree = ET.parse('result.xml')
 root = tree.getroot()
 # root = ET.Element('GOC')
+rootCount = -1
+tuTraiNghia = False
 for i in range(len(contents)):
-    element = root.makeelement('MUC_TU', {'Noi_dung': words[i], 'Loai_tu': types[i]})
-    root.append(element)
-    ET.SubElement(root[i], 'Y_NGHIA', {'Noi_dung': contents[i], 'Minh_hoa': exs[i]})
+    if i - 1 < 0 or (types[i] != types[i - 1]):
+        rootCount += 1
+        tuTraiNghia = False
+
+        element = root.makeelement('MUC_TU', {'Cap_tu': types[i]})
+        root.append(element)
+        ET.SubElement(root[rootCount], 'TU_CHINH', {'Y_nghia': contents[i], 'Noi_dung': words[i], 'Minh_hoa': exs[i]})
+    
+    elif words[i] != 'Cặp từ trái nghĩa':
+        tuTraiNghia = False
+        ET.SubElement(root[rootCount], 'TU_TRAI_NGHIA', {'Y_nghia': contents[i], 'Noi_dung': words[i], 'Minh_hoa': exs[i]})
+    
+    else:
+        tuTraiNghia = True
+        ET.SubElement(root[rootCount], 'CAP_TU_TRAI_NGHIA', {'Noi_dung': contents[i], 'Minh_hoa': exs[i]})
+    # element = root.makeelement('MUC_TU', {'Noi_dung': words[i], 'Loai_tu': types[i]})
+    # ET.SubElement(root[i], 'Y_NGHIA', {'Noi_dung': contents[i], 'Minh_hoa': exs[i]})
 
 indent(root)
 tree.write('result.xml', encoding='utf-8', xml_declaration=True)
