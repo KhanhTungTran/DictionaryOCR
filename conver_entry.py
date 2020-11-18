@@ -36,4 +36,3 @@ for fileName in path:
             run.font.color.rgb = RGBColor(0x00, 0x00, 0x00)
             
 doc.save('test.docx')
-
