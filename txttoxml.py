@@ -198,8 +198,6 @@ for i in range(len(words)):
         types[i] = types[i][:-1]
 
 import xml.etree.ElementTree as ET
-import json
-import json
 
 def indent(elem, level=0):
     i = "\n" + level*"  "
