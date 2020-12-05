@@ -16,7 +16,7 @@ def indent(elem, level=0):
         if level and (not elem.tail or not elem.tail.strip()):
             elem.tail = i
 
-fileName = 'sua-loi-muc-tu_tu-dien-Hoang-Phe_ver-2.docx'
+fileName = 'C:/Users/Tung/Desktop/DictionaryOCR/texts/Tu dien Nguyen Kim Than/result_tu dien Nguyen Kim Than.docx'
 doc = Document(fileName)
 
 tree = ET.parse('result.xml')

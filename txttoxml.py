@@ -4,9 +4,9 @@ import re
 import os
 from docx.shared import Inches
 
-inputsDir = 'results'
+inputsDir = 'texts/Tu dien Nguyen Kim Than/results'
 path = os.listdir(inputsDir)
-path = sorted(path, key = lambda x: len(x))
+# path = sorted(path, key = lambda x: len(x))
 
 # doc = Document()
 # para = ''
@@ -16,19 +16,21 @@ path = sorted(path, key = lambda x: len(x))
 
 # notes = {'(id.).': '(ít dùng)', '(kng.).': '(khẩu ngữ)', '(ph.).': '(phương ngữ)', '(vch.).': '(văn chương)'} # còn nữa
 
-# tags = { 'cd.': 'ca dao', 'dt.': 'danh từ', 'đt.': 'động từ', 'gt.': 'giới từ', 'id.': 'ít dùng', 'lt.': 'liên từ', ' ng.': ' nghĩa', 'pt.': 'phụ từ', 'tht.': 'thán từ', 'tng.': 'tục ngữ', 'trt.': 'trợ từ', 'vt.': 'vị từ'}
+# Tags và Notes dùng cho từ điển 002 (Ng Kim Than):
+tags = { 'cd.': 'ca dao', 'dt.': 'danh từ', 'đt.': 'động từ', 'gt.': 'giới từ', 'id.': 'ít dùng', 'lt.': 'liên từ', ' ng.': ' nghĩa', 'pt.': 'phụ từ', 'tht.': 'thán từ', 'tng.': 'tục ngữ', 'trt.': 'trợ từ', 'vt.': 'vị từ'}
 
-# notes = {'(id.).': '(ít dùng)', '(kng.)': '(khẩu ngữ)' , '(thgt.)': '(thông tục)', '(ph.)': '(phương ngữ)', '(vchg.)': '(văn chương)',  '(trtr.)': '(trang trọng)', '(kc.)': '(kiểu cách)', '(chm.)': '(chuyên môn)'} # còn nữa
+notes = {'(id.).': '(ít dùng)', '(kng.)': '(khẩu ngữ)' , '(thgt.)': '(thông tục)', '(ph.)': '(phương ngữ)', '(vchg.)': '(văn chương)',  '(trtr.)': '(trang trọng)', '(kc.)': '(kiểu cách)', '(chm.)': '(chuyên môn)'} # còn nữa
 
-tags = {' dt.': ' danh từ', 'đgt.': 'động từ', ' tt.': ' tính từ', ' pht.': ' phụ từ',}
+# tags = {' dt.': ' danh từ', 'đgt.': 'động từ', ' tt.': ' tính từ', ' pht.': ' phụ từ',}
 
-notes = {'(id.).': '(ít dùng)', '(kng.).': '(khẩu ngữ)', '(ph.).': '(phương ngữ)', '(vch.).': '(văn chương)'}
+# notes = {'(id.).': '(ít dùng)', '(kng.).': '(khẩu ngữ)', '(ph.).': '(phương ngữ)', '(vch.).': '(văn chương)'}
 
 alphabets = {'a': ['a', 'ă', 'â', 'à', 'á', 'ã', 'ả', 'ạ', 'ắ', 'ằ', 'ẵ', 'ẳ', 'ặ', 'ấ', 'ầ', 'ẫ', 'ẩ', 'ậ'], 'b': ['b'], 'c': ['c'], 'd': ['d', 'đ'], 'e': ['e', 'ê', 'é', 'è', 'ẽ', 'ẻ', 'ẹ', 'ế', 'ề', 'ễ', 'ể', 'ệ'], 'f': ['f'], 'g': ['g'], 'h': ['h'], 'i': ['i', 'í', 'ì', 'ĩ', 'ỉ', 'ị'], 'j': ['j'], 'k': ['k'], 'l': ['l'], 'm': ['m'], 'n': ['n'], 'o': ['o', 'ô', 'ơ', 'ó', 'ò', 'õ', 'ỏ', 'ọ', 'ố', 'ồ', 'ỗ', 'ổ', 'ộ', 'ớ', 'ờ', 'ỡ', 'ở', 'ợ'], 'p': ['p'], 'q': ['q'], 'r': ['r'], 's': ['s'], 't': ['t'], 'u': ['u', 'ư', 'ú', 'ù', 'ũ', 'ủ', 'ụ', 'ứ', 'ừ', 'ữ', 'ử', 'ự'], 'v': ['v'], 'w': ['w'], 'x': ['x'], 'y': ['y'], 'z': ['z']}
 
-extrasBeforeTag = {'cn.': '(cũng nói)', 'cv.': 'cũng viết'}  # tiếp theo sẽ là 1 từ in nghiêng có chấm cuối câu 
+# extrasBeforeTag = {'cn.': '(cũng nói)', 'cv.': 'cũng viết'}  # tiếp theo sẽ là 1 từ in nghiêng có chấm cuối câu 
 # extrasAfterTag = {'x.': 'xem' }
-extrasAfterTag = {' x.': ' xem'}
+# extrasAfterTag = {'Xem': 'Xem', 'Như': 'Như', 'IV.': '', 'V.': '', 'III.': '', 'II.': '', 'I.': ''}
+extrasAfterTag = {'Xem': 'Xem', 'Như': 'Như'}
 newEntry = True
 currentAlphabet = '`'
 lastLine = '.'
@@ -59,12 +61,21 @@ def checkFirstWord(text, currAlphabet, alphabetsDict):
             return True
     return False
 
-def checkOrderNumber(text):
-    for ordNum in ['II', 'III', 'IV', 'V']:
-        if text.startswith(ordNum):
-            return ordNum
-    return ''
+def checkOrderNumber(text: str):
+    for ordNum in ['IV.', 'V.', 'III.', 'II.', 'I.']:
+        idx = text.find(ordNum)
+        if idx != - 1:
+            return ordNum, idx
+    return None
 
+def checkNumber(text: str):
+    for num in ['1.', '2.', '3.', '4.', '5.', '6.', '7.', '8.', '9.']:
+        idx = text.find(num)
+        if idx != - 1:
+            return num, idx
+    return None
+
+countNextAlphabet = 0
 for txt in path:
     print(txt)
     txtFile = open(inputsDir + '/' + txt, encoding='utf-8', errors='ignore').read()
@@ -80,22 +91,23 @@ for txt in path:
     for key, value in notes.items():
         txtFile = txtFile.replace(key, value)
 
-    for key, value in extrasBeforeTag.items():
-        txtFile = txtFile.replace(key, value)
+    # for key, value in extrasBeforeTag.items():
+    #     txtFile = txtFile.replace(key, value)
         
     contents = txtFile.split('\n')
-    
+    contents = contents[:-1]    # bỏ đi kí tự đặc biệt luôn xuất hiện ở dòng cuối    
+
     for line in contents:
         if line == '':
             newEntry = True
             continue
 
+        # print(currentAlphabet)
         # if line.lower() == chr(ord(currentAlphabet) + 1) + chr(ord(currentAlphabet) + 1):
+        #     currentAlphabet = chr(ord(currentAlphabet) + 1)
         #     continue
         
-        if newEntry or line.lower().startswith(chr(ord(currentAlphabet) + 1) + ',' + chr(ord(currentAlphabet) + 1)) or ((lastLine.endswith('.') or lastLine.endswith('!') or lastLine.endswith('?') or lastLine.endswith(',')) and (checkFirstWord(line, currentAlphabet, alphabets) or checkOrderNumber(line))):
-            # print(line)
-            newEntry = False
+        if newEntry or line.lower().startswith(chr(ord(currentAlphabet) + 1) + ',' + chr(ord(currentAlphabet) + 1)) or ((lastLine.endswith('.') or lastLine.endswith('!') or lastLine.endswith('?') or lastLine.endswith(',')) and checkFirstWord(line, currentAlphabet, alphabets)) or checkOrderNumber(line) != None or checkNumber(line) != None:
             nextAlphabet = chr(ord(currentAlphabet) + 1)
             if line.lower().startswith(nextAlphabet + ',' + nextAlphabet):
                 currentAlphabet = nextAlphabet
@@ -103,26 +115,32 @@ for txt in path:
                 meanings.append(line[4:])
                 types.append('Ý nghĩa chữ cái')
 
-            # else:
-            elif (lastLine.endswith('.') or lastLine.endswith('!') or lastLine.endswith('?') or lastLine.endswith(',')):
+            # elif (lastLine.endswith('.') or lastLine.endswith('!') or lastLine.endswith('?') or lastLine.endswith(',')):
+            else:
+                if line.lower().startswith(nextAlphabet) and newEntry:
+                    countNextAlphabet += 1
+                    if countNextAlphabet == 3:
+                        currentAlphabet = nextAlphabet
+                        countNextAlphabet = 0
+                else:
+                    countNextAlphabet = 0
+
                 if (hasSubString(line.replace(',', '.').lower(), tags) or hasExtraTag(line.replace(',', '.'))): # mục từ mới
-                    if line.lower().startswith(chr(ord(currentAlphabet) + 1)) or line.lower().startswith('"' + chr(ord(currentAlphabet) + 1)):
-                        currentAlphabet = chr(ord(currentAlphabet) + 1)
+                    # if line.lower().startswith(chr(ord(currentAlphabet) + 1)) or line.lower().startswith('"' + chr(ord(currentAlphabet) + 1)) and not checkOrderNumber(line):
+                    #     currentAlphabet = chr(ord(currentAlphabet) + 1)
                     
-                    elif (not checkFirstWord(line, currentAlphabet, alphabets)) and checkOrderNumber(line) == '':
+                    if (not checkFirstWord(line, currentAlphabet, alphabets)) and not checkOrderNumber(line):
                         if lastLine.endswith(' '):
                             meanings[-1] += line
                         else:
                             meanings[-1] += ' ' + line
                         continue
-                    # elif not (line.lower().startswith(currentAlphabet) or line.lower().startswith('"' + currentAlphabet)):
-                    #     yes = False
-                    #     for ordNum in ['II', 'III', 'IV', 'V']:
-                    #         if line.startswith(ordNum):
-                    #             yes = True
-                    #             break
-                    #     if not yes:
-                    #         continue
+                    # elif checkOrderNumber(line) != None:
+                    #     num, idx = checkOrderNumber(line)
+                    #     meanings[-1] += line[:idx]
+                    #     line = words[-1] + ' ' + line[idx:]
+
+                    # print(line, currentAlphabet)
 
                     currentTags = {}
                     
@@ -134,8 +152,13 @@ for txt in path:
                         if tag in tempLine:
                             currentTags[tag] = tempLine.find(tag)
                     sortedCurrentTags = sorted(currentTags.items(), key=lambda kv: kv[1])
+                    # # Giải pháp tạm thời:
+                    # if len(sortedCurrentTags) == 0:
+                    #     # sortedCurrentTags.append(('', 0))
+                    #     sortedCurrentTags.append(('', tempLine.find('.')))
+                    # print(line)
                     word = line[:sortedCurrentTags[0][1]]
-                    content = line[sortedCurrentTags[len(sortedCurrentTags) - 1][1] + len(sortedCurrentTags[len(sortedCurrentTags) - 1][0]):]
+                    content = line[sortedCurrentTags[-1][1] + len(sortedCurrentTags[-1][0]):]
 
                     words.append(word)
 
@@ -164,15 +187,36 @@ for txt in path:
                     else:
                         # docPara.add_run(line)
                         meanings[-1] += line
-                elif checkOrderNumber(line) != '':
-                    num = checkOrderNumber(line)
-                    words.append(num)
-                    meanings.append(line[len(num):])
+                elif checkOrderNumber(line) != None:
+                    # print(line)
+                    num, idx = checkOrderNumber(line)
+                    words.append(words[-1])
+                    meanings[-1] += line[:idx - 1]
+                    meanings.append(line[idx - 1:])
                     types.append('')
+                
+                elif checkNumber(line) != None:
+                    # print(line)
+                    num, idx = checkNumber(line)
+                    if num == '1.':
+                        meanings[-1] += line[:line.find('.') + 1]
+                        words.append(line[line.find('.') + 1:idx - 1])
+                        meanings.append(line[idx - 1:])
+                        types.append('')
+
+
+                    else:
+                        words.append(words[-1])
+                        meanings[-1] += line[:idx - 1]
+                        meanings.append(line[idx - 1:])
+                        types.append(types[-1])
+
                 else:
+                    # print(line)
                     words.append('')
                     meanings.append(line)
                     types.append('')
+            newEntry = False
         elif lastLine.endswith(' '):
             # docPara.add_run(line)
             meanings[-1] += line
@@ -180,6 +224,9 @@ for txt in path:
             # docPara.add_run(' ' + line)
             meanings[-1] += ' ' + line
         lastLine = line
+    # count += 1
+    # if count == 8:
+    #     break
 
 for i in range(len(words)):
     if len(words[i]) >= 1 and words[i][0] == ' ':
@@ -187,10 +234,18 @@ for i in range(len(words)):
     if len(words[i]) >= 1 and words[i][-1] == ' ':
         words[i] = words[i][:-1]
 
+    for chr in ['.', '?', ':', '!', '-', '(', '"', ';', ',']:
+        if words[i].endswith(chr):
+            words[i] = words[i][:-1]
+    
     if len(meanings[i]) >= 1 and meanings[i][0] == ' ':
         meanings[i] = meanings[i][1:]
     if len(meanings[i]) >= 1 and meanings[i][-1] == ' ':
         meanings[i] = meanings[i][:-1]
+
+    for ordNum in ['IV.', 'V.', 'III.', 'II.', 'I.', '1.', '2.', '3.', '4.', '5.', '6.', '7.', '8.', '9.']:
+        if meanings[i].startswith(ordNum):
+            meanings[i] = meanings[i][len(ordNum) + 1:]
 
     if len(types[i]) >= 1 and types[i][0] == ' ':
         types[i] = types[i][1:]
