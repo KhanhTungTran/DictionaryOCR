@@ -4,33 +4,39 @@ import re
 import os
 from docx.shared import Inches
 
-inputsDir = 'results'
+inputsDir = 'texts/Tu dien Hoang Phe/results_Hoang Phe'
 path = os.listdir(inputsDir)
-path = sorted(path, key = lambda x: len(x))
+# path = sorted(path, key = lambda x: len(x))
 
 doc = Document()
 para = ''
 docPara = doc.add_paragraph('')
 
-# tags = {' d.': ' danh từ', 'đg.': 'động từ', ' t.': ' tính từ', 'đ.': 'đại từ', ' p.': ' phụ từ', 'k.': 'kết từ', 'tr.': 'trợ từ', ' c.': ' cảm từ', 'hoài nghi đt.': 'hoài nghi động từ'}
+# Tags và Notes dùng cho từ điển 001 (Hoàng Phê):
+tags = {' d.': ' danh từ', 'đg.': 'động từ', ' t.': ' tính từ', 'đ.': 'đại từ', ' p.': ' phụ từ', 'k.': 'kết từ', 'tr.': 'trợ từ', ' c.': ' cảm từ', 'hoài nghi đt.': 'hoài nghi động từ'}
 
-# notes = {'(id.).': '(ít dùng)', '(kng.).': '(khẩu ngữ)', '(ph.).': '(phương ngữ)', '(vch.).': '(văn chương)'}
+notes = {'(id.).': '(ít dùng)', '(kng.).': '(khẩu ngữ)', '(ph.).': '(phương ngữ)', '(vch.).': '(văn chương)'}
 
+# # Tags và Notes dùng cho từ điển 002 (Ng Kim Than):
 # tags = { 'cd.': 'ca dao', 'dt.': 'danh từ', 'đt.': 'động từ', 'gt.': 'giới từ', 'id.': 'ít dùng', 'lt.': 'liên từ', ' ng.': ' nghĩa', 'pt.': 'phụ từ', 'tht.': 'thán từ', 'tng.': 'tục ngữ', 'trt.': 'trợ từ', 'vt.': 'vị từ'}
 
 # notes = {'(id.).': '(ít dùng)', '(kng.)': '(khẩu ngữ)' , '(thgt.)': '(thông tục)', '(ph.)': '(phương ngữ)', '(vchg.)': '(văn chương)',  '(trtr.)': '(trang trọng)', '(kc.)': '(kiểu cách)', '(chm.)': '(chuyên môn)'} # còn nữa
 
-tags = {' dt.': ' danh từ', 'đgt.': 'động từ', ' tt.': ' tính từ', ' pht.': ' phụ từ',}
+# tags = {' dt.': ' danh từ', 'đgt.': 'động từ', ' tt.': ' tính từ', ' pht.': ' phụ từ',}
 
-notes = {'(id.).': '(ít dùng)', '(kng.).': '(khẩu ngữ)', '(ph.).': '(phương ngữ)', '(vch.).': '(văn chương)'}
+# notes = {'(id.).': '(ít dùng)', '(kng.).': '(khẩu ngữ)', '(ph.).': '(phương ngữ)', '(vch.).': '(văn chương)'}
 
 alphabets = {'a': ['a', 'ă', 'â', 'à', 'á', 'ã', 'ả', 'ạ', 'ắ', 'ằ', 'ẵ', 'ẳ', 'ặ', 'ấ', 'ầ', 'ẫ', 'ẩ', 'ậ'], 'b': ['b'], 'c': ['c'], 'd': ['d', 'đ'], 'e': ['e', 'ê', 'é', 'è', 'ẽ', 'ẻ', 'ẹ', 'ế', 'ề', 'ễ', 'ể', 'ệ'], 'f': ['f'], 'g': ['g'], 'h': ['h'], 'i': ['i', 'í', 'ì', 'ĩ', 'ỉ', 'ị'], 'j': ['j'], 'k': ['k'], 'l': ['l'], 'm': ['m'], 'n': ['n'], 'o': ['o', 'ô', 'ơ', 'ó', 'ò', 'õ', 'ỏ', 'ọ', 'ố', 'ồ', 'ỗ', 'ổ', 'ộ', 'ớ', 'ờ', 'ỡ', 'ở', 'ợ'], 'p': ['p'], 'q': ['q'], 'r': ['r'], 's': ['s'], 't': ['t'], 'u': ['u', 'ư', 'ú', 'ù', 'ũ', 'ủ', 'ụ', 'ứ', 'ừ', 'ữ', 'ử', 'ự'], 'v': ['v'], 'w': ['w'], 'x': ['x'], 'y': ['y'], 'z': ['z']}
 
-extrasBeforeTag = {'cn.': '(cũng nói)', 'cv.': 'cũng viết'}  # tiếp theo sẽ là 1 từ in nghiêng có chấm cuối câu 
-extrasAfterTag = {' x.': ' Xem'}
+extrasBeforeTag = {'cn.': '(cũng nói)', 'cv.': '(cũng viết)'}  # tiếp theo sẽ là 1 từ in nghiêng có chấm cuối câu 
+
+extrasAfterTag = {' x.': ' Xem', 'Như': 'Như'}
 newEntry = True
 currentAlphabet = '`'
 lastLine = '.'
+pages = []
+lastWord = ''
+lastType = ''
 
 def hasSubString(text, tags):
     for tag in tags.keys():
@@ -54,11 +60,20 @@ def checkFirstWord(text, currAlphabet, alphabetsDict):
     return False
 
 def checkOrderNumber(text):
-    for ordNum in ['II', 'III', 'IV', 'V']:
-        if text.startswith(ordNum):
-            return ordNum
-    return ''
+    for ordNum in ['IV.', 'V.', 'III.', 'II.', 'I.']:
+        idx = text.find(ordNum)
+        if idx != - 1:
+            return ordNum, idx
+    return None
 
+def checkNumber(text: str):
+    for num in ['1.', '2.', '3.', '4.', '5.', '6.', '7.', '8.', '9.']:
+        idx = text.find(num)
+        if idx != - 1:
+            return num, idx
+    return None
+
+countNextAlphabet = 0
 for txt in path:
     print(txt)
     txtFile = open(inputsDir + '/' + txt, encoding='utf-8', errors='ignore').read()
@@ -67,9 +82,9 @@ for txt in path:
     txtFile = txtFile.replace('ä', 'a')
     txtFile = txtFile.replace('“', '"')
     txtFile = txtFile.replace('”', '"')
-    # txtFile = txtFile.replace('¿', 't')
-    # txtFile = txtFile.replace(':.', 't.')
-    # txtFile = txtFile.replace('¡(', 't')
+    txtFile = txtFile.replace('¿', 't')
+    txtFile = txtFile.replace(':.', 't.')
+    txtFile = txtFile.replace('¡(', 't')
     
     for key, value in notes.items():
         txtFile = txtFile.replace(key, value)
@@ -78,7 +93,8 @@ for txt in path:
         txtFile = txtFile.replace(key, value)
         
     contents = txtFile.split('\n')
-    
+    contents = contents[:-1]    # bỏ đi kí tự đặc biệt luôn xuất hiện ở dòng cuối (đối với từ điển Nguyễn Kim Than)
+
     for line in contents:
         if line == '':
             newEntry = True
@@ -87,99 +103,123 @@ for txt in path:
         # if line.lower() == chr(ord(currentAlphabet) + 1) + chr(ord(currentAlphabet) + 1):
         #     continue
 
-        if newEntry or line.lower().startswith(chr(ord(currentAlphabet) + 1) + ',' + chr(ord(currentAlphabet) + 1)) or ((lastLine.endswith('.') or lastLine.endswith('!') or lastLine.endswith('?') or lastLine.endswith(',')) and (checkFirstWord(line, currentAlphabet, alphabets) or checkOrderNumber(line))):
-            # print(line, newEntry)
-            newEntry = False
+        
+        if newEntry or line.lower().startswith(chr(ord(currentAlphabet) + 1) + ',' + chr(ord(currentAlphabet) + 1)) or ((lastLine.endswith('.') or lastLine.endswith('!') or lastLine.endswith('?') or lastLine.endswith(',')) and checkFirstWord(line, currentAlphabet, alphabets)) or checkOrderNumber(line) != None or checkNumber(line) != None:
             nextAlphabet = chr(ord(currentAlphabet) + 1)
             if line.lower().startswith(nextAlphabet + ',' + nextAlphabet):
                 currentAlphabet = nextAlphabet
                 docPara = doc.add_paragraph('')
                 docPara.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
                 docPara.add_run(nextAlphabet + ',' + nextAlphabet.upper() + ' ').bold = True
+                lastWord = nextAlphabet + ',' + nextAlphabet.upper() + ' '
+                lastType = ''
                 docPara.add_run(line[4:])
 
-            elif (lastLine.endswith('.') or lastLine.endswith('!') or lastLine.endswith('?') or lastLine.endswith(',')):
-            # else:
-                if (hasSubString(line.replace(',', '.').lower(), tags) or hasExtraTag(line.replace(',', '.'))): # mục từ mới
-                    # print(line)
-                    # print(line.lower(), '"' + chr(ord(currentAlphabet) + 1))
-                    # print(line, line.lower().startswith('"' + currentAlphabet))
-                    if line.lower().startswith(chr(ord(currentAlphabet) + 1)) or line.lower().startswith('"' + chr(ord(currentAlphabet) + 1)):
-                        currentAlphabet = chr(ord(currentAlphabet) + 1)
+            # elif (lastLine.endswith('.') or lastLine.endswith('!') or lastLine.endswith('?') or lastLine.endswith(',')):
+            else:
+                if line.lower().startswith(nextAlphabet) and newEntry:
+                    countNextAlphabet += 1
+                    if countNextAlphabet == 3:
+                        currentAlphabet = nextAlphabet
+                        countNextAlphabet = 0
+                else:
+                    countNextAlphabet = 0
+
+                if (hasSubString(line.replace(',', '.').lower(), tags) or hasExtraTag(line.replace(',', '.'))): # mục từ mới)
+                    # if line.lower().startswith(chr(ord(currentAlphabet) + 1)) or line.lower().startswith('"' + chr(ord(currentAlphabet) + 1)):
+                    #     currentAlphabet = chr(ord(currentAlphabet) + 1)
                     
-                    elif (not checkFirstWord(line, currentAlphabet, alphabets)) and checkOrderNumber(line) == '':
+                    if (not checkFirstWord(line, currentAlphabet, alphabets)) and checkOrderNumber(line) == '':
                         if lastLine.endswith(' '):
                             docPara.add_run(line)
                         else:
                             docPara.add_run(' ' + line)
                         continue
-                    # elif not (line.lower().startswith(currentAlphabet) or line.lower().startswith('"' + currentAlphabet)):
-                    #     yes = False
-                    #     for ordNum in ['II', 'III', 'IV', 'V']:
-                    #         if line.startswith(ordNum):
-                    #             yes = True
-                    #             break
-                    #     if not yes:
-                    #         continue
                     currentTags = {}
                     
                     tempLine = line.replace(',', '.').lower()
                     for extra in extrasAfterTag.keys():
                         if extra in line:
                             currentTags[extra] = line.find(extra)
-                            # word = line[:line.find(extra)]
-                            # content = line[line.find(extra):]
                     for tag in tags.keys():
                         if tag in tempLine:
                             currentTags[tag] = tempLine.find(tag)
-                            # word = line[:line.find(tag)]
-                            # content = line[line.find(tag):]
                     sortedCurrentTags = sorted(currentTags.items(), key=lambda kv: kv[1])
                     word = line[:sortedCurrentTags[0][1]]
-                    content = line[sortedCurrentTags[len(sortedCurrentTags) - 1][1] + len(sortedCurrentTags[len(sortedCurrentTags) - 1][0]):]
-                    # print(line, sortedCurrentTags)
+                    # content = line[sortedCurrentTags[len(sortedCurrentTags) - 1][1] + len(sortedCurrentTags[len(sortedCurrentTags) - 1][0]):]
+                    content = line[sortedCurrentTags[-1][1] + len(sortedCurrentTags[-1][0]):]
 
                     docPara = doc.add_paragraph('')
                     docPara.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
                     docPara.add_run(word).bold = True
+                    lastWord = word
+
+                    # if sortedCurrentTags[0][0] in tags.keys():
+                    #     docPara.add_run(tags[sortedCurrentTags[0][0]]).italic = True
+                    #     lastType = tags[sortedCurrentTags[0][0]]
+                    # else:
+                    #     docPara.add_run(extrasAfterTag[sortedCurrentTags[0][0]]).italic = True
+                    #     lastType = extrasAfterTag[sortedCurrentTags[0][0]]
 
                     for tagKey,_ in sortedCurrentTags:
-                        # print(tagKey)
                         if tagKey in tags.keys():
                             if tagKey.startswith(' '):
                                 docPara.add_run(tags[tagKey]).italic = True
+                                lastType += tags[tagKey]
                             else:
                                 docPara.add_run(' ' + tags[tagKey]).italic = True
+                                lastType += ' ' + tags[tagKey]
                         else:
                             docPara.add_run(' ' + extrasAfterTag[tagKey]).italic = True
+                            lastType += ' ' + extrasAfterTag[tagKey]
                     docPara.add_run(content)
-                    # for extra in extrasBeforeTag.keys():
-                    #     if extra in word:
-                    #         extraWord = word[word.find(extra) + len(extra):]
-                    #         extraValue = extrasBeforeTag[extra]
-                    #         word = word[:word.find(extra)]
+
                 elif checkFirstWord(line, currentAlphabet, alphabets):
-                    # print(line)
                     docPara = doc.add_paragraph('')
                     docPara.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
 
                     for i in range(2, len(line)):
-                        if (line[i].isupper() or line[i].isdigit()) and line[i - 1] == ' ' and (line[i - 2] != '.' and line[i - 2] != ',' and line[i - 2] != '!' and line[i - 2] != '?'):
+                        # if (line[i].isupper() or line[i].isdigit()) and line[i - 1] == ' ' and (line[i - 2] != '.' and line[i - 2] != ',' and line[i - 2] != '!' and line[i - 2] != '?'):
+                        if line[i].isupper() and line[i - 1] == ' ' and (line[i - 2] != '.' and line[i - 2] != ',' and line[i - 2] != '!' and line[i - 2] != '?'):
                             docPara.add_run(line[:i]).bold = True
+                            lastWord = line[:i]
                             docPara.add_run(line[i:])
+                            lastType = ''
                             break
                     else:
                         docPara.add_run(line)
-                elif checkOrderNumber(line) != '':
-                    num = checkOrderNumber(line)
+                elif checkOrderNumber(line) != None:
+                    num, idx = checkOrderNumber(line)
+                    docPara.add_run(line[:idx - 1])
                     docPara = doc.add_paragraph('')
                     docPara.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
-                    docPara.add_run(num).bold = True
-                    docPara.add_run(line[len(num):])
+                    docPara.add_run(lastWord).bold = True
+                    docPara.add_run(line[idx - 1:])
+                    lastType = ''
+                
+                elif checkNumber(line) != None:
+                    num, idx = checkNumber(line)
+                    if num == '1.':
+                        docPara.add_run(line[:line.find('.') + 1])
+                        docPara = doc.add_paragraph('')
+                        docPara.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+                        docPara.add_run(line[line.find('.') + 1:idx - 1]).bold = True
+                        docPara.add_run(line[idx - 1:])
+                        lastWord = line[line.find('.') + 1:idx - 1]
+                        lastType = ''
+                    else:
+                        docPara.add_run(line[:idx - 1])
+                        docPara = doc.add_paragraph('')
+                        docPara.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+                        docPara.add_run(lastWord).bold = True
+                        docPara.add_run(lastType).italic = True
                 else:
                     docPara = doc.add_paragraph('')
                     docPara.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
                     docPara.add_run(line)
+                    lastWord = ''
+                    lastType = ''
+            newEntry = False
         elif lastLine.endswith(' '):
             docPara.add_run(line)
         else:

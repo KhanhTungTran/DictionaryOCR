@@ -6,6 +6,7 @@ from docx.shared import Inches
 
 inputsDir = 'texts/Tu dien Nguyen Kim Than/results'
 path = os.listdir(inputsDir)
+imagesDir = 'images/002'
 # path = sorted(path, key = lambda x: len(x))
 
 # doc = Document()
@@ -39,6 +40,7 @@ words = []
 types = []
 meanings = []
 exs = []
+pages = []
 
 def hasSubString(text, tags):
     for tag in tags.keys():
@@ -77,7 +79,15 @@ def checkNumber(text: str):
 
 countNextAlphabet = 0
 for txt in path:
-    print(txt)
+    partNo = int(txt[32:33]) - 1
+    pageNo = int(txt[txt.find('_') + 1:txt.find('-')])
+
+    print(txt[:-4] + '.png')
+    try:
+        os.rename(imagesDir + '/' + txt[:-6] + '.png', imagesDir + '/' + '002' + format(partNo * 1000 + pageNo, '04d') + '.png')
+    except FileNotFoundError as _:
+        pass
+
     txtFile = open(inputsDir + '/' + txt, encoding='utf-8', errors='ignore').read()
     txtFile = re.sub(u'[^\u0020-\uD7FF\u0009\u000A\u000D\uE000-\uFFFD\U00010000-\U0010FFFF]+','', txtFile) # remove all non-XML-compatible characters
     txtFile = txtFile.replace('Ä', 'A')
@@ -95,7 +105,7 @@ for txt in path:
     #     txtFile = txtFile.replace(key, value)
         
     contents = txtFile.split('\n')
-    contents = contents[:-1]    # bỏ đi kí tự đặc biệt luôn xuất hiện ở dòng cuối    
+    contents = contents[:-1]    # bỏ đi kí tự đặc biệt luôn xuất hiện ở dòng cuối
 
     for line in contents:
         if line == '':
@@ -114,6 +124,7 @@ for txt in path:
                 words.append(nextAlphabet + ',' + nextAlphabet.upper())
                 meanings.append(line[4:])
                 types.append('Ý nghĩa chữ cái')
+                pages.append('002' + format(partNo * 1000 + pageNo, '04d'))
 
             # elif (lastLine.endswith('.') or lastLine.endswith('!') or lastLine.endswith('?') or lastLine.endswith(',')):
             else:
@@ -176,6 +187,7 @@ for txt in path:
                         else:
                             types[-1] += ' ' + extrasAfterTag[tagKey]
                     meanings.append(content)
+                    pages.append('002' + format(partNo * 1000 + pageNo, '04d'))
 
                 elif checkFirstWord(line, currentAlphabet, alphabets):
                     for i in range(2, len(line)):
@@ -183,50 +195,54 @@ for txt in path:
                             words.append(line[:i])
                             meanings.append(line[i:])
                             types.append('')
+                            pages.append('002' + format(partNo * 1000 + pageNo, '04d'))
                             break
                     else:
-                        # docPara.add_run(line)
                         meanings[-1] += line
                 elif checkOrderNumber(line) != None:
-                    # print(line)
                     num, idx = checkOrderNumber(line)
                     words.append(words[-1])
                     meanings[-1] += line[:idx - 1]
+                    if pages[-1].find('002' + format(partNo * 1000 + pageNo, '04d')) == -1:
+                        pages[-1] += ', ' + ('002' + format(partNo * 1000 + pageNo, '04d'))
                     meanings.append(line[idx - 1:])
                     types.append('')
+                    pages.append('002' + format(partNo * 1000 + pageNo, '04d'))
                 
                 elif checkNumber(line) != None:
-                    # print(line)
                     num, idx = checkNumber(line)
                     if num == '1.':
                         meanings[-1] += line[:line.find('.') + 1]
                         words.append(line[line.find('.') + 1:idx - 1])
                         meanings.append(line[idx - 1:])
                         types.append('')
-
+                        pages.append('002' + format(partNo * 1000 + pageNo, '04d'))
 
                     else:
                         words.append(words[-1])
                         meanings[-1] += line[:idx - 1]
                         meanings.append(line[idx - 1:])
                         types.append(types[-1])
+                        pages.append('002' + format(partNo * 1000 + pageNo, '04d'))
 
                 else:
                     # print(line)
                     words.append('')
                     meanings.append(line)
                     types.append('')
+                    pages.append('002' + format(partNo * 1000 + pageNo, '04d'))
             newEntry = False
         elif lastLine.endswith(' '):
             # docPara.add_run(line)
             meanings[-1] += line
+            if pages[-1].find('002' + format(partNo * 1000 + pageNo, '04d')) == -1:
+                pages[-1] += ', ' + ('002' + format(partNo * 1000 + pageNo, '04d'))
         else:
             # docPara.add_run(' ' + line)
             meanings[-1] += ' ' + line
+            if pages[-1].find('002' + format(partNo * 1000 + pageNo, '04d')) == -1:
+                pages[-1] += ', ' + ('002' + format(partNo * 1000 + pageNo, '04d'))
         lastLine = line
-    # count += 1
-    # if count == 8:
-    #     break
 
 for i in range(len(words)):
     if len(words[i]) >= 1 and words[i][0] == ' ':
@@ -272,7 +288,7 @@ def indent(elem, level=0):
 tree = ET.parse('result.xml')
 root = tree.getroot()
 for i in range(len(words)):
-    element = root.makeelement('MUC_TU', {'Noi_dung': words[i], 'Loai_tu': types[i]})
+    element = root.makeelement('MUC_TU', {'Noi_dung': words[i], 'Loai_tu': types[i], 'Trang': pages[i]})
     root.append(element)
     ET.SubElement(root[i], 'Y_NGHIA', {'Noi_dung': meanings[i]})
 
