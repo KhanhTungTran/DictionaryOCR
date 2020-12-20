@@ -43,14 +43,27 @@ for para in doc.paragraphs:
             type += run.text
         else:
             meaning += run.text
-
     # Cắt các kí tự khoảng trắng dư thừa
     while word.startswith(' '):
         word = word[1:]
+    for char in ['.', '?', ':', '!', '-', '(', '"', ';', ',', '1', 'I']:
+        if word.endswith(char):
+            word = word[:-1]
+    # Cắt các kí tự khoảng trắng dư thừa
+    while word.startswith(' '):
+        word = word[1:]
+    while word.endswith(' '):
+        word = word[:-1]
+
     while type.startswith(' '):
-        type = type[1:]        
+        type = type[1:]
+    while type.endswith(' '):
+        type = type[:-1]
+
     while meaning.startswith(' '):
         meaning = meaning[1:]
+    while meaning.endswith(' '):
+        meaning = meaning[:-1]
 
     # Xuất vào file xml
     element = root.makeelement('MUC_TU', {'Noi_dung': word, 'Loai_tu': type})
