@@ -37,18 +37,18 @@ def splitImageToEntries(imageNames, inputsDir, columnsDir):
         lowers = [y for y in range(H-1) if hist[y]>th and hist[y+1]<=th]
 
         rotated = cv2.bitwise_not(rotated)
-        # rotated = cv2.cvtColor(rotated, cv2.COLOR_GRAY2BGR)
-        # for y in uppers:
-        #     cv2.line(rotated, (0,y), (W, y), (255,0,0), 1)
+        rotated = cv2.cvtColor(rotated, cv2.COLOR_GRAY2BGR)
+        for y in uppers:
+            cv2.line(rotated, (0,y), (W, y), (255,0,0), 1)
 
-        # for y in lowers:
-        #     cv2.line(rotated, (0,y), (W, y), (0,255,0), 1)
+        for y in lowers:
+            cv2.line(rotated, (0,y), (W, y), (0,255,0), 1)
 
         # cv2.imshow("drawed", cv2.resize(rotated, (int(rotated.shape[1]/5), int(rotated.shape[0]/5))))
         # cv2.waitKey(0)
         # cv2.destroyAllWindows()
 
-        # cv2.imwrite(columnsDir + '/' + image[0:-4] + '-' + '0' + '.jpg', rotated)
+        cv2.imwrite(columnsDir + '/' + image[0:-4] + '-' + 'test' + '.jpg', rotated)
 
         lineMinHeight = 20
         lineMinLength = 1350
@@ -90,4 +90,5 @@ if __name__ == "__main__":
     imageName = list(filter(lambda file: file[-3:] == 'jpg', os.listdir(inputDir)))
     columnDir = 'splitEntry/001'
 
-    splitImageToEntries(imageName, inputDir, columnDir)
+    # splitImageToEntries(imageName, inputDir, columnDir)
+    splitImageToEntries(['0010018-0.jpg'], inputDir, columnDir)

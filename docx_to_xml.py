@@ -1,4 +1,5 @@
 from docx import Document
+from docx.enum.text import WD_ALIGN_PARAGRAPH
 import xml.etree.ElementTree as ET
 
 def indent(elem, level=0):
@@ -16,8 +17,10 @@ def indent(elem, level=0):
         if level and (not elem.tail or not elem.tail.strip()):
             elem.tail = i
 
-fileName = 'C:/Users/Tung/Desktop/DictionaryOCR/texts/Tu dien Nguyen Kim Than/result_tu dien Nguyen Kim Than.docx'
+# fileName = 'C:/Users/Tung/Desktop/DictionaryOCR/texts/Tu dien Nguyen Kim Than/result_tu dien Nguyen Kim Than.docx'
+fileName = 'result.docx'
 doc = Document(fileName)
+updatedDoc = Document()
 
 tree = ET.parse('result.xml')
 root = tree.getroot()
@@ -70,6 +73,14 @@ for para in doc.paragraphs:
     root.append(element)
     ET.SubElement(root[entryNo], 'Y_NGHIA', {'Noi_dung': meaning})
     entryNo += 1
-    
+
+    # Xuất lại vào file word mới:
+    updatedDocPara = updatedDoc.add_paragraph('')
+    updatedDocPara.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    updatedDocPara.add_run(word).bold = True
+    updatedDocPara.add_run(' ' + type + ' ').italic = True
+    updatedDocPara.add_run(meaning)
+
 indent(root)
 tree.write('result.xml', encoding='utf-8', xml_declaration=True)
+updatedDoc.save('result_updated.docx')
