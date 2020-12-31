@@ -31,35 +31,40 @@ def splitImageToEntries(imageNames, inputsDir, columnsDir):
         # Find and draw the upper and lower boundary of each lines
         hist = cv2.reduce(rotated,1, cv2.REDUCE_AVG).reshape(-1)
 
-        th = 10
+        th = 5 # 10: TD001, 5: TD002
         H,W = img.shape[:2]
         uppers = [y for y in range(H-1) if hist[y]<=th and hist[y+1]>th]
         lowers = [y for y in range(H-1) if hist[y]>th and hist[y+1]<=th]
 
         rotated = cv2.bitwise_not(rotated)
-        rotated = cv2.cvtColor(rotated, cv2.COLOR_GRAY2BGR)
-        for y in uppers:
-            cv2.line(rotated, (0,y), (W, y), (255,0,0), 1)
+        # rotated = cv2.cvtColor(rotated, cv2.COLOR_GRAY2BGR)
+        # for y in uppers:
+        #     cv2.line(rotated, (0,y), (W, y), (255,0,0), 1)
 
-        for y in lowers:
-            cv2.line(rotated, (0,y), (W, y), (0,255,0), 1)
+        # for y in lowers:
+        #     cv2.line(rotated, (0,y), (W, y), (0,255,0), 1)
 
         # cv2.imshow("drawed", cv2.resize(rotated, (int(rotated.shape[1]/5), int(rotated.shape[0]/5))))
         # cv2.waitKey(0)
         # cv2.destroyAllWindows()
 
-        cv2.imwrite(columnsDir + '/' + image[0:-4] + '-' + 'test' + '.jpg', rotated)
+        # cv2.imwrite(columnsDir + '/' + image[0:-4] + '-' + 'test' + '.jpg', rotated)
 
         lineMinHeight = 20
-        lineMinLength = 1350
+        lineMinLength = 1800 # 1350: TD001, 1800: TD002
         entryCount = 0
         startEntry = 0
         endEntry = 0
         newEntry = False
+        # print(len(uppers), len(lowers))
         for i in range(len(uppers)):
-            if (i == len(uppers) - 1 and len(uppers) > len(lowers)):
+            # print(uppers[i] - lowers[i])
+            if (i == len(uppers) - 1): 
                 newEntry = True
-                endEntry = -1
+                if len(uppers) > len(lowers):
+                    endEntry = -1
+                else:
+                    endEntry = lowers[i]
             else:
                 if abs(uppers[i] - lowers[i]) <= lineMinHeight:
                     continue
@@ -72,6 +77,7 @@ def splitImageToEntries(imageNames, inputsDir, columnsDir):
                 coords = cv2.findNonZero(line) # Find all non-zero points (text)
                 x, y, w, h = cv2.boundingRect(coords) # Find minimum spanning bounding box
                 # Kết thúc một mục từ:
+                # print(w)
                 if w <= lineMinLength:
                     newEntry = True
                     endEntry = lowers[i]
@@ -86,9 +92,9 @@ def splitImageToEntries(imageNames, inputsDir, columnsDir):
 
 
 if __name__ == "__main__":
-    inputDir = 'splitColumn/001'
+    inputDir = 'splitColumn/002'
     imageName = list(filter(lambda file: file[-3:] == 'jpg', os.listdir(inputDir)))
-    columnDir = 'splitEntry/001'
+    columnDir = 'splitEntry/002'
 
-    # splitImageToEntries(imageName, inputDir, columnDir)
-    splitImageToEntries(['0010018-0.jpg'], inputDir, columnDir)
+    splitImageToEntries(imageName, inputDir, columnDir)
+    # splitImageToEntries(['0020013-0.jpg'], inputDir, columnDir)
