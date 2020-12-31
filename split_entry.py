@@ -2,6 +2,8 @@ import cv2
 import numpy as np
 import os
 
+from numpy.core.fromnumeric import take
+
 def splitImageToEntries(imageNames, inputsDir, columnsDir):
     for image in imageNames:
         print('---------------------',image)
@@ -31,7 +33,7 @@ def splitImageToEntries(imageNames, inputsDir, columnsDir):
         # Find and draw the upper and lower boundary of each lines
         hist = cv2.reduce(rotated,1, cv2.REDUCE_AVG).reshape(-1)
 
-        th = 5 # 10: TD001, 5: TD002
+        th = 3 # 10: TD001, 5: TD002, 3: TD003
         H,W = img.shape[:2]
         uppers = [y for y in range(H-1) if hist[y]<=th and hist[y+1]>th]
         lowers = [y for y in range(H-1) if hist[y]>th and hist[y+1]<=th]
@@ -51,14 +53,15 @@ def splitImageToEntries(imageNames, inputsDir, columnsDir):
         # cv2.imwrite(columnsDir + '/' + image[0:-4] + '-' + 'test' + '.jpg', rotated)
 
         lineMinHeight = 20
-        lineMinLength = 1800 # 1350: TD001, 1800: TD002
+        lineMinLength = 1600 # 1350: TD001, 1800: TD002
+        newLineMaxStart = 50
         entryCount = 0
         startEntry = 0
         endEntry = 0
         newEntry = False
         # print(len(uppers), len(lowers))
         for i in range(len(uppers)):
-            # print(uppers[i] - lowers[i])
+            print(uppers[i] - lowers[i])
             if (i == len(uppers) - 1): 
                 newEntry = True
                 if len(uppers) > len(lowers):
@@ -77,24 +80,27 @@ def splitImageToEntries(imageNames, inputsDir, columnsDir):
                 coords = cv2.findNonZero(line) # Find all non-zero points (text)
                 x, y, w, h = cv2.boundingRect(coords) # Find minimum spanning bounding box
                 # Kết thúc một mục từ:
-                # print(w)
-                if w <= lineMinLength:
+                print(x, w)
+                # if w <= lineMinLength: # cho từ điển 001 và 002
+                    # newEntry = True
+                    # endEntry = lowers[i]
+                if x < newLineMaxStart:
                     newEntry = True
-                    endEntry = lowers[i]
-
+                    endEntry = uppers[i]
             if newEntry:
                 cv2.imwrite(columnsDir + '/' + image[0:-4] + '-' + str(entryCount) + '.jpg', rotated[startEntry:endEntry+5, :])
                 entryCount += 1
-                if not i + 1 == len(uppers):
-                    startEntry = uppers[i + 1]
+                # if not i + 1 == len(uppers):
+                #     startEntry = uppers[i + 1]
+                startEntry = uppers[i]
                 newEntry = False
         
 
 
 if __name__ == "__main__":
-    inputDir = 'splitColumn/002'
+    inputDir = 'splitColumn/003'
     imageName = list(filter(lambda file: file[-3:] == 'jpg', os.listdir(inputDir)))
-    columnDir = 'splitEntry/002'
+    columnDir = 'splitEntry/003'
 
     splitImageToEntries(imageName, inputDir, columnDir)
-    # splitImageToEntries(['0020013-0.jpg'], inputDir, columnDir)
+    # splitImageToEntries(['0030007-0.jpg'], inputDir, columnDir)

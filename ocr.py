@@ -44,7 +44,7 @@ def entryImageToText(imageNames, inputsDir, outputsDir):
         # cv2.destroyAllWindows()
 
 if __name__ == "__main__":
-    inputDir = 'splitEntry/001'
+    inputDir = 'splitEntry/002'
     imageName = list(filter(lambda file: file[-3:] == 'jpg', os.listdir(inputDir)))
-    outputDir = 'texts/Tu dien Hoang Phe/results_new'
+    outputDir = 'texts/Tu dien Nguyen Kim Than/results_new'
     entryImageToText(imageName, inputDir, outputDir)

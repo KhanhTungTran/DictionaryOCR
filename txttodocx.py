@@ -4,7 +4,7 @@ import re
 import os
 from docx.shared import Inches
 
-inputsDir = 'texts/Tu dien Hoang Phe/results_new'
+inputsDir = 'texts/Tu dien Nguyen Kim Than/results_new'
 path = os.listdir(inputsDir)
 path = sorted(path, key = lambda x: int(x[:7]) * 1000 + (int(x[8]) + 1) * 100 + int(x[10:len(x) - 4]))
 
@@ -12,15 +12,15 @@ doc = Document()
 para = ''
 docPara = doc.add_paragraph('')
 
-# Tags và Notes dùng cho từ điển 001 (Hoàng Phê):
-tags = {' d.': ' danh từ', 'đg.': 'động từ', ' t.': ' tính từ', 'đ.': 'đại từ', ' p.': ' phụ từ', 'k.': 'kết từ', 'tr.': 'trợ từ', ' c.': ' cảm từ', 'hoài nghi đt.': 'hoài nghi động từ'}
+# # Tags và Notes dùng cho từ điển 001 (Hoàng Phê):
+# tags = {' d.': ' danh từ', 'đg.': 'động từ', ' t.': ' tính từ', 'đ.': 'đại từ', ' p.': ' phụ từ', 'k.': 'kết từ', 'tr.': 'trợ từ', ' c.': ' cảm từ', 'hoài nghi đt.': 'hoài nghi động từ'}
 
-notes = {'(id.).': '(ít dùng)', '(kng.).': '(khẩu ngữ)', '(ph.).': '(phương ngữ)', '(vch.).': '(văn chương)'}
+# notes = {'(id.).': '(ít dùng)', '(kng.).': '(khẩu ngữ)', '(ph.).': '(phương ngữ)', '(vch.).': '(văn chương)'}
 
-# # Tags và Notes dùng cho từ điển 002 (Ng Kim Than):
-# tags = { 'cd.': 'ca dao', 'dt.': 'danh từ', 'đt.': 'động từ', 'gt.': 'giới từ', 'id.': 'ít dùng', 'lt.': 'liên từ', ' ng.': ' nghĩa', 'pt.': 'phụ từ', 'tht.': 'thán từ', 'tng.': 'tục ngữ', 'trt.': 'trợ từ', 'vt.': 'vị từ'}
+# Tags và Notes dùng cho từ điển 002 (Ng Kim Than):
+tags = { 'cd.': 'ca dao', 'dt.': 'danh từ', 'đt.': 'động từ', 'gt.': 'giới từ', 'id.': 'ít dùng', 'lt.': 'liên từ', ' ng.': ' nghĩa', 'pt.': 'phụ từ', 'tht.': 'thán từ', 'tng.': 'tục ngữ', 'trt.': 'trợ từ', 'vt.': 'vị từ'}
 
-# notes = {'(id.).': '(ít dùng)', '(kng.)': '(khẩu ngữ)' , '(thgt.)': '(thông tục)', '(ph.)': '(phương ngữ)', '(vchg.)': '(văn chương)',  '(trtr.)': '(trang trọng)', '(kc.)': '(kiểu cách)', '(chm.)': '(chuyên môn)'} # còn nữa
+notes = {'(id.).': '(ít dùng)', '(kng.)': '(khẩu ngữ)' , '(thgt.)': '(thông tục)', '(ph.)': '(phương ngữ)', '(vchg.)': '(văn chương)',  '(trtr.)': '(trang trọng)', '(kc.)': '(kiểu cách)', '(chm.)': '(chuyên môn)'} # còn nữa
 
 # tags = {' dt.': ' danh từ', 'đgt.': 'động từ', ' tt.': ' tính từ', ' pht.': ' phụ từ',}
 
@@ -183,7 +183,6 @@ for txt in path:
                 docPara.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
 
                 for i in range(2, len(line)):
-                    # if (line[i].isupper() or line[i].isdigit()) and line[i - 1] == ' ' and (line[i - 2] != '.' and line[i - 2] != ',' and line[i - 2] != '!' and line[i - 2] != '?'):
                     if line[i].isupper() and line[i - 1] == ' ' and (line[i - 2] != '.' and line[i - 2] != ',' and line[i - 2] != '!' and line[i - 2] != '?'):
                         docPara.add_run(line[:i]).bold = True
                         lastWord = line[:i]
@@ -192,7 +191,11 @@ for txt in path:
                         lastTypeKey = ''
                         break
                 else:
-                    temp = spaceSplit(line)
+                    openingBracket = line.find('(')
+                    if openingBracket == -1:
+                        temp = spaceSplit(line)
+                    else:
+                        temp = line[:openingBracket]
                     docPara.add_run(temp).bold = True
                     docPara.add_run(line[len(temp):])
                     lastWord = temp
