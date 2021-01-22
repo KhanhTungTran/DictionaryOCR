@@ -27,60 +27,76 @@ root = tree.getroot()
 
 entryNo = 0
 currentAlphabet = '`'
+word = ''
+meaning = ''
+first = True
 for para in doc.paragraphs:
-    word = ''
-    type = ''
-    meaning = ''
+    if len(para.runs) == 0:
+        continue
+    if para.runs[0].bold and not first:
+        # Cắt các kí tự khoảng trắng dư thừa
+        while word.startswith(' '):
+            word = word[1:]
+        for char in ['.', '?', ':', '!', '-', '(', '"', ';', ',', '1', 'I']:
+            if word.endswith(char):
+                word = word[:-1]
+        # Cắt các kí tự khoảng trắng dư thừa
+        while word.startswith(' '):
+            word = word[1:]
+        while word.endswith(' '):
+            word = word[:-1]
 
+        while meaning.startswith(' '):
+            meaning = meaning[1:]
+        while meaning.endswith(' '):
+            meaning = meaning[:-1]
+
+        # Xuất vào file xml
+        element = root.makeelement('MUC_TU', {'Noi_dung': word})
+        root.append(element)
+        ET.SubElement(root[entryNo], 'Y_NGHIA', {'Noi_dung': meaning})
+        entryNo += 1
+        word = ''
+        meaning = ''
+    first = False
     # Lặp tìm vùng nào là mục từ, loại từ và định nghĩa từ
     for run in para.runs:
         if run.bold:
-            nextAlphabet = chr(ord(currentAlphabet) + 1)
-            
-            if run.text.lower() == nextAlphabet + ',' + nextAlphabet:
-                type = 'Ý nghĩa chữ cái'
-                currentAlphabet = nextAlphabet
-            
             word += run.text
-        elif run.italic:
-            type += run.text
         else:
             meaning += run.text
-    # Cắt các kí tự khoảng trắng dư thừa
-    while word.startswith(' '):
-        word = word[1:]
-    for char in ['.', '?', ':', '!', '-', '(', '"', ';', ',', '1', 'I']:
-        if word.endswith(char):
-            word = word[:-1]
-    # Cắt các kí tự khoảng trắng dư thừa
-    while word.startswith(' '):
-        word = word[1:]
-    while word.endswith(' '):
+    meaning += '\n'
+# Cắt các kí tự khoảng trắng dư thừa
+while word.startswith(' '):
+    word = word[1:]
+for char in ['.', '?', ':', '!', '-', '(', '"', ';', ',', '1', 'I']:
+    if word.endswith(char):
         word = word[:-1]
+# Cắt các kí tự khoảng trắng dư thừa
+while word.startswith(' '):
+    word = word[1:]
+while word.endswith(' '):
+    word = word[:-1]
 
-    while type.startswith(' '):
-        type = type[1:]
-    while type.endswith(' '):
-        type = type[:-1]
+while meaning.startswith(' '):
+    meaning = meaning[1:]
+while meaning.endswith(' '):
+    meaning = meaning[:-1]
 
-    while meaning.startswith(' '):
-        meaning = meaning[1:]
-    while meaning.endswith(' '):
-        meaning = meaning[:-1]
+# Xuất vào file xml
+element = root.makeelement('MUC_TU', {'Noi_dung': word})
+root.append(element)
+ET.SubElement(root[entryNo], 'Y_NGHIA', {'Noi_dung': meaning})
+entryNo += 1
+        
 
-    # Xuất vào file xml
-    element = root.makeelement('MUC_TU', {'Noi_dung': word, 'Loai_tu': type})
-    root.append(element)
-    ET.SubElement(root[entryNo], 'Y_NGHIA', {'Noi_dung': meaning})
-    entryNo += 1
-
-    # Xuất lại vào file word mới:
-    updatedDocPara = updatedDoc.add_paragraph('')
-    updatedDocPara.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
-    updatedDocPara.add_run(word).bold = True
-    updatedDocPara.add_run(' ' + type + ' ').italic = True
-    updatedDocPara.add_run(meaning)
+    # # Xuất lại vào file word mới:
+    # updatedDocPara = updatedDoc.add_paragraph('')
+    # updatedDocPara.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    # updatedDocPara.add_run(word).bold = True
+    # updatedDocPara.add_run(' ' + type + ' ').italic = True
+    # updatedDocPara.add_run(meaning)
 
 indent(root)
 tree.write('result.xml', encoding='utf-8', xml_declaration=True)
-updatedDoc.save('result_updated.docx')
+# updatedDoc.save('result_updated.docx')
