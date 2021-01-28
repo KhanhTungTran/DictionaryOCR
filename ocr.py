@@ -4,7 +4,6 @@ import os
 # from PIL import Image
 import numpy as np
 import cv2
-import easyocr
 
 
 def entryImageToText(imageNames, inputsDir, outputsDir):
@@ -40,12 +39,6 @@ def entryImageToText(imageNames, inputsDir, outputsDir):
                 f.write(text)
         except Exception as identifier:
             pass
-
-        reader = easyocr.Reader(['vi'])
-        result = reader.readtext(img, detail = 0 )
-        text = reduce(lambda a, b: a + b, result, '')
-        with open(outputsDir + '/' + imageName[:-4] + '_easyocr.' + 'txt', 'w', encoding='utf8') as f:
-            f.write(text)
         # cv2.imshow("filtered", cv2.resize(img, (int(img.shape[1]), int(img.shape[0]))))
         # cv2.waitKey(0)
         # cv2.destroyAllWindows()
