@@ -8,5 +8,6 @@ texts/
 images/
 splitColumn/
 splitEntry/
+splitLine/
 .vscode/
 __pycache__/
