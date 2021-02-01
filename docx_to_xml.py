@@ -27,10 +27,18 @@ root = tree.getroot()
 
 entryNo = 0
 currentAlphabet = '`'
+pageNum = ''
 for para in doc.paragraphs:
     word = ''
     type = ''
     meaning = ''
+
+    if para.alignment == WD_ALIGN_PARAGRAPH.CENTER:
+        updatedDocPara = updatedDoc.add_paragraph('')
+        updatedDocPara.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        updatedDocPara.add_run(para.runs[0].text).bold = True
+        pageNum = para.runs[0].text[-4:]
+        continue
 
     # Lặp tìm vùng nào là mục từ, loại từ và định nghĩa từ
     for run in para.runs:
@@ -69,7 +77,7 @@ for para in doc.paragraphs:
         meaning = meaning[:-1]
 
     # Xuất vào file xml
-    element = root.makeelement('MUC_TU', {'Noi_dung': word, 'Loai_tu': type})
+    element = root.makeelement('MUC_TU', {'Noi_dung': word, 'Loai_tu': type, 'So_trang': pageNum})
     root.append(element)
     ET.SubElement(root[entryNo], 'Y_NGHIA', {'Noi_dung': meaning})
     entryNo += 1

@@ -74,6 +74,23 @@ def checkNumber(text: str):
             return num, idx
     return None
 
+def formatCurrentWord(currWord: str):
+    specialChars = ["?", "%", "("]
+    for specialChar in specialChars:
+        if currWord.startswith(specialChar):
+            currWord = currWord[:0] + '"' + currWord[0+1:]
+            currWord = currWord[:-1] + '"'
+            break
+
+    i = 0
+    try:
+        if currWord[i] not in [currentAlphabet, '"']:
+            currWord = currWord[:i] + currentAlphabet + currWord[i+1:]
+            # i += 1
+    except Exception as _:
+        pass
+    return currWord
+
 countNextAlphabet = 0
 for txt in path:
     print(txt)
@@ -92,7 +109,12 @@ for txt in path:
 
     for key, value in extrasBeforeTag.items():
         txtFile = txtFile.replace(key, value)
-        
+
+    if int(txt[10:10 + min(txt[10:].find('-') if txt[10:].find('-') != -1 else 2000, txt[10:].find('.'))]) == 0 and int(txt[8:9]) == 0:
+        docPara = doc.add_paragraph('')
+        docPara.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        docPara.add_run("TRANG " + txt[3:7]).bold = True
+
     line = txtFile.split('\n')[0]
 
     if newEntry or line.lower().startswith(chr(ord(currentAlphabet) + 1) + ',' + chr(ord(currentAlphabet) + 1)) or checkOrderNumber(line) or checkNumber(line):
@@ -101,7 +123,7 @@ for txt in path:
             currentAlphabet = nextAlphabet
             docPara = doc.add_paragraph('')
             docPara.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
-            docPara.add_run(nextAlphabet + ',' + nextAlphabet.upper() + ' ').bold = True
+            docPara.add_run(formatCurrentWord(nextAlphabet + ',' + nextAlphabet.upper() + ' ')).bold = True
             lastWord = nextAlphabet + ',' + nextAlphabet.upper() + ' '
             lastType = ''
             docPara.add_run(line[4:])
@@ -141,7 +163,7 @@ for txt in path:
 
                 docPara = doc.add_paragraph('')
                 docPara.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
-                docPara.add_run(word).bold = True
+                docPara.add_run(formatCurrentWord(word)).bold = True
                 lastWord = word
 
                 # if sortedCurrentTags[0][0] in tags.keys():
@@ -171,7 +193,7 @@ for txt in path:
                 for i in range(2, len(line)):
                     # if (line[i].isupper() or line[i].isdigit()) and line[i - 1] == ' ' and (line[i - 2] != '.' and line[i - 2] != ',' and line[i - 2] != '!' and line[i - 2] != '?'):
                     if line[i].isupper() and line[i - 1] == ' ' and (line[i - 2] != '.' and line[i - 2] != ',' and line[i - 2] != '!' and line[i - 2] != '?'):
-                        docPara.add_run(line[:i]).bold = True
+                        docPara.add_run(formatCurrentWord(line[:i])).bold = True
                         lastWord = line[:i]
                         docPara.add_run(line[i:])
                         lastType = ''
@@ -183,7 +205,7 @@ for txt in path:
                 docPara.add_run(line[:idx - 1])
                 docPara = doc.add_paragraph('')
                 docPara.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
-                docPara.add_run(lastWord).bold = True
+                docPara.add_run(formatCurrentWord(lastWord)).bold = True
                 docPara.add_run(line[idx - 1:])
                 lastType = ''
             
@@ -193,7 +215,7 @@ for txt in path:
                     docPara.add_run(line[:line.find('.') + 1])
                     docPara = doc.add_paragraph('')
                     docPara.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
-                    docPara.add_run(line[line.find('.') + 1:idx - 1]).bold = True
+                    docPara.add_run(formatCurrentWord(line[line.find('.') + 1:idx - 1])).bold = True
                     docPara.add_run(line[idx - 1:])
                     lastWord = line[line.find('.') + 1:idx - 1]
                     lastType = ''
@@ -201,7 +223,7 @@ for txt in path:
                     docPara.add_run(line[:idx - 1])
                     docPara = doc.add_paragraph('')
                     docPara.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
-                    docPara.add_run(lastWord).bold = True
+                    docPara.add_run(formatCurrentWord(lastWord)).bold = True
                     docPara.add_run(lastType).italic = True
             else:
                 docPara = doc.add_paragraph('')
