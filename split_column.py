@@ -102,9 +102,9 @@ def splitImageToColumns(imageNames, inputsDir, columnsDir):
         cv2.imwrite(columnsDir + '/' + image[0:-4] + '-' + '1' + '.png', colRightImg)
 
 if __name__ == "__main__":
-    inputDir = 'images/033'
+    inputDir = 'images/001'
     imageName = list(filter(lambda file: file[-3:] == 'png', os.listdir(inputDir)))
-    columnDir = 'splitColumn/033'
+    columnDir = 'splitColumn/001'
 
     splitImageToColumns(imageName, inputDir, columnDir)
     # splitImageToColumns(['Tu dien tieng viet Ng Kim Than p1 (1)_019.jpg'], inputDir, columnDir)
